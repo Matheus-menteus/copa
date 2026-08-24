@@ -832,15 +832,57 @@ document.getElementById("btn-iniciar").addEventListener("click", () => {
   document.getElementById("tela-jogo").classList.add("flex");
 
   renderStatus();
-  avancarCalendario()
+  function avancarCalendario(){
+  aplicarRecuperacaoPassiva();
+
+  if (gameState.eventoForcado){
+    const id = gameState.eventoForcado;
+    gameState.eventoForcado = null;
+    renderDecisao(EVENTOS_DECISAO[id]);
+    return;
+  }
+
+  let blocoAtual = gameState.calendario[gameState.blocoIndex];
+
+  if (gameState.itemIndex >= blocoAtual.itens.length){
+    gameState.blocoIndex += 1;
+    gameState.itemIndex = 0;
+    if (gameState.blocoIndex >= gameState.calendario.length){
+      finalizarTemporada();
+      return;
+    }
+    blocoAtual = gameState.calendario[gameState.blocoIndex];
+    gameState.faseAtual = blocoAtual.fase;
+    adicionarLog(`Início da fase: ${blocoAtual.fase}.`);
+  }
+
+  if (!gameState.faseAtual){
+    gameState.faseAtual = blocoAtual.fase;
+  }
+
+  const item = blocoAtual.itens[gameState.itemIndex];
+  gameState.itemIndex += 1;
+
+  renderStatus();
+  renderLog();
+
+  // AQUI É ONDE A IA ENTRA:
   if (item.tipo === "decisao"){
     if (item.id === "__random__") {
-      // Aqui acontece a mágica! Se for evento aleatório, chama a IA.
       dispararEventoIA();
     } else {
       renderDecisao(EVENTOS_DECISAO[item.id]);
     }
-  } else {;
+  } else {
+    const corrida = CORRIDAS[item.id];
+    if (corrida.tipo === "grandvolta"){
+      gameState.grandVoltaTemp = { tacticSum: 0, count: 0 };
+      renderCorridaGrandVolta(corrida, 0);
+    } else {
+      renderCorridaUmDia(corrida);
+    }
+  }
+}
 
 /* ============================================================
    CALENDÁRIO DA TEMPORADA
