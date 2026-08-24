@@ -708,7 +708,48 @@ function proximaDecisaoAleatoria(){
   }
   return gameState.filaDecisoes.pop();
 }
+/* ============================================================
+   INTEGRAÇÃO COM A IA (GEMINI)
+   ============================================================ */
+async function dispararEventoIA() {
+  // 1. Coloca uma "Tela de Carregamento" charmosa na tela do jogo
+  document.getElementById("evento-titulo").textContent = "Bastidores do Pelotão...";
+  document.getElementById("evento-descricao").innerHTML = `<span style="color:var(--yellow)">A comissão técnica está tomando uma decisão... (Gerando evento inédito com IA 🧠)</span>`;
+  document.getElementById("evento-opcoes").innerHTML = "";
+  setBadge("IA", "GERANDO");
 
+  // 2. Empacota os dados do seu ciclista
+  const dadosParaIA = {
+    temporada: gameState.temporada,
+    equipe: gameState.equipe,
+    vertente: gameState.vertente,
+    potencia: gameState.atributos.potencia,
+    explosao: gameState.atributos.explosao,
+    resistencia: gameState.atributos.resistencia,
+    reputacao: gameState.atributos.reputacao
+  };
+
+  try {
+    // 3. Manda para o nosso "guarda-costas" na Vercel
+    const resposta = await fetch('/api/evento', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dadosParaIA)
+    });
+
+    if (!resposta.ok) throw new Error("Erro de comunicação com a API.");
+
+    // 4. Recebe o evento em JSON e joga na tela!
+    const eventoIA = await resposta.json();
+    renderDecisao(eventoIA);
+
+  } catch (erro) {
+    console.error("A IA falhou ou demorou demais:", erro);
+    // Se a API der qualquer erro, o jogo não quebra. Ele puxa um evento normal do banco fixo.
+    const idBackup = proximaDecisaoAleatoria();
+    renderDecisao(EVENTOS_DECISAO[idBackup]);
+  }
+}
 /* ============================================================
    TELA DE CRIAÇÃO
    ============================================================ */
@@ -791,8 +832,15 @@ document.getElementById("btn-iniciar").addEventListener("click", () => {
   document.getElementById("tela-jogo").classList.add("flex");
 
   renderStatus();
-  avancarCalendario();
-});
+  avancarCalendario()
+  if (item.tipo === "decisao"){
+    if (item.id === "__random__") {
+      // Aqui acontece a mágica! Se for evento aleatório, chama a IA.
+      dispararEventoIA();
+    } else {
+      renderDecisao(EVENTOS_DECISAO[item.id]);
+    }
+  } else {;
 
 /* ============================================================
    CALENDÁRIO DA TEMPORADA
