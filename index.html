@@ -1,210 +1,1563 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Bolão Copa 2026</title>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domingo de Fogo — Simulador de Carreira no Ciclismo</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--pitch:#0A2B23;--pitch2:#0E3A2E;--paper:#FBFAF6;--ink:#10211C;--line:#E7E5DA;
---pick:#00C27A;--pick2:#00A266;--pickink:#04150F;--gold:#E9B949;--muted:#7C8B83;--teal:#117A65;--shadow:0 10px 30px rgba(0,0,0,.18);}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html,body{margin:0;padding:0;}
-body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);
-min-height:100vh;padding-bottom:120px;position:relative;background:linear-gradient(180deg,var(--pitch),var(--pitch2));}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background-image:url('data:image/png;base64,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');background-size:cover;background-position:center 18%;transform:scale(1.06);}
-body::after{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(120% 55% at 50% -8%,rgba(233,185,73,.22),transparent 60%),linear-gradient(180deg,rgba(7,25,20,.74),rgba(7,25,20,.82) 45%,rgba(7,25,20,.93));}
-.wrap{max-width:560px;margin:0 auto;padding:0 14px;}
-header{text-align:center;padding:24px 14px 6px;}
-.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;}
-h1{margin:0;color:#fff;font-size:30px;font-weight:900;letter-spacing:.01em;text-transform:uppercase;line-height:1.02;}
-h1 .thin{display:block;font-size:14px;font-weight:600;letter-spacing:.18em;color:#bfe8d6;margin-top:8px;}
-.tabs{display:flex;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:5px;margin:16px 0 4px;position:sticky;top:8px;z-index:30;backdrop-filter:blur(8px);}
-.tab{flex:1;border:none;background:transparent;color:#cfe9dd;font-family:inherit;font-weight:800;font-size:12.5px;padding:11px 5px;border-radius:10px;cursor:pointer;letter-spacing:.01em;transition:all .15s;}
-.tab.active{background:var(--pick);color:var(--pickink);box-shadow:0 4px 12px rgba(0,194,122,.35);}
-.panel{background:var(--paper);border-radius:16px;box-shadow:var(--shadow);padding:16px;margin:14px 0 18px;}
-label.field{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:7px;}
-#nome{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;font-size:17px;color:var(--ink);background:#fff;font-family:inherit;}
-#nome:focus{outline:none;border-color:var(--pick);box-shadow:0 0 0 3px rgba(0,194,122,.18);}
-#nome.warn{border-color:#E0533D;box-shadow:0 0 0 3px rgba(224,83,61,.16);}
-.nome-hint{color:#E0533D;font-size:13px;margin:8px 2px 0;font-weight:600;display:none;}.nome-hint.show{display:block;}
-.progress-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;gap:12px;}
-.progress-txt{font-size:13px;font-weight:700;}.progress-txt b{color:var(--pick2);}
-.bar{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden;}
-.bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--pick),var(--gold));transition:width .35s;}
-.secnote{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;color:#cfe9dd;font-size:12.5px;font-weight:600;padding:11px 14px;margin:14px 0 4px;text-align:center;}
-.secnote b{color:var(--gold);}
-.day{display:flex;align-items:center;gap:10px;margin:20px 2px 12px;}
-.day .dot{width:7px;height:7px;border-radius:99px;background:var(--gold);}
-.day .d{color:#fff;font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;}
-.day .line{flex:1;height:1px;background:rgba(255,255,255,.16);}
-.match{background:var(--paper);border-radius:14px;box-shadow:var(--shadow);padding:12px 12px 13px;margin-bottom:11px;}
-.match-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;}
-.grp{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 7px;}
-.vote-tag{font-size:11px;font-weight:800;color:var(--pick2);opacity:0;transition:.2s;}.vote-tag.show{opacity:1;}
-.res-tag{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;}
-.res-tag.fim{background:#E9F7F0;color:var(--pick2);}.res-tag.draw{background:#FBF1D6;color:#9a7b16;}.res-tag.pend{background:#EFEDE6;color:var(--muted);}
-.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;margin-bottom:11px;}
-.teams.res-teams{margin-bottom:2px;}
-.team{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;}
-.team .flag{font-size:30px;line-height:1;}.team .nm{font-size:13px;font-weight:700;line-height:1.15;}
-.team.win .nm{color:var(--pick2);}.team.win .flag{filter:drop-shadow(0 0 0 transparent);}
-.team.lose{opacity:.5;}
-.vs{font-size:12px;font-weight:800;color:var(--muted);}
-.score{font-size:26px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.02em;min-width:62px;text-align:center;}
-.score span{color:var(--muted);font-weight:700;margin:0 3px;font-size:18px;}
-.score.pend{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.04em;}
-.win-badge{font-size:11px;text-align:center;color:var(--pick2);font-weight:800;margin-top:2px;min-height:14px;}
-.picks{display:grid;grid-template-columns:1fr 64px 1fr;gap:6px;}
-.pick{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:11px 6px;font-family:inherit;font-size:13px;font-weight:800;color:var(--ink);cursor:pointer;transition:transform .08s,background .15s,border-color .15s,color .15s;display:flex;align-items:center;justify-content:center;min-height:46px;}
-.pick.mid{font-size:18px;color:var(--muted);}.pick:active{transform:scale(.96);}
-.pick.sel{background:var(--pick);border-color:var(--pick2);color:var(--pickink);box-shadow:0 4px 12px rgba(0,194,122,.35);}
-.sendbar{position:fixed;left:0;right:0;bottom:0;background:rgba(8,28,23,.92);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.1);padding:12px 14px calc(12px + env(safe-area-inset-bottom));z-index:20;}
-.sendbar .inner{max-width:560px;margin:0 auto;display:flex;gap:9px;}
-.send-note{color:#bfeed6;font-size:11px;text-align:center;margin:0 auto 8px;max-width:560px;min-height:14px;}.send-note.warn{color:var(--gold);font-weight:700;}
-.btn{flex:1;border:none;border-radius:12px;padding:15px 12px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;transition:transform .08s;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn:active{transform:scale(.98);}.btn-wa{background:#25D366;color:#04240f;flex:2;}
-.btn-copy{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);}.btn-copy.done{background:var(--gold);color:#2a1d00;border-color:var(--gold);}
-.hidden{display:none;}
-.rk-head{text-align:center;color:#fff;margin:6px 0 2px;}
-.rk-sub{text-align:center;color:#bfe8d6;font-size:12px;margin-bottom:14px;}
-.podium{display:grid;grid-template-columns:1fr 1.15fr 1fr;align-items:end;gap:8px;margin:8px 0 18px;}
-.pod{background:var(--paper);border-radius:14px 14px 8px 8px;box-shadow:var(--shadow);padding:12px 6px 14px;text-align:center;position:relative;}
-.pod .medal{font-size:26px;}.pod .pname{font-weight:800;font-size:13px;margin:4px 0 2px;}.pod .ppts{font-size:12px;color:var(--muted);font-weight:700;}
-.pod.p1{transform:translateY(-10px);border-top:4px solid var(--gold);}
-.pod.p2{border-top:4px solid #BFC9CA;}.pod.p3{border-top:4px solid #CD7F32;}
-.pod .rkpos{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:11px;font-weight:800;border-radius:99px;padding:2px 8px;}
-.rktable{background:var(--paper);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;}
-.rkrow{display:grid;grid-template-columns:34px 1fr auto auto auto;gap:8px;align-items:center;padding:11px 12px;border-bottom:1px solid var(--line);font-size:13px;}
-.rkrow:last-child{border-bottom:none;}.rkrow.head{background:#10211C;color:#fff;font-weight:800;font-size:11px;letter-spacing:.04em;text-transform:uppercase;}
-.rkrow .pos{font-weight:800;color:var(--pick2);text-align:center;}.rkrow .nm{font-weight:700;}
-.rkrow .v{text-align:center;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700;}.rkrow .tot{text-align:center;font-weight:800;color:var(--ink);}
-.rkrow.lead{background:linear-gradient(90deg,rgba(233,185,73,.18),transparent);}
-.rk-note{color:#9fc3b5;font-size:11px;text-align:center;margin:14px 6px 0;line-height:1.5;}
-footer{text-align:center;color:rgba(255,255,255,.45);font-size:11px;padding:18px 14px 6px;}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
-</style></head><body>
-<div class="wrap">
-<header>
-<div class="eyebrow">⚽ Copa do Mundo 2026 · Bolão da Galera</div>
-<h1>Bolão da Galera<span class="thin">Resultados · Palpites · Ranking</span></h1>
-</header>
-<div class="tabs">
-<button class="tab active" data-tab="r1">📊 Rodada 1</button>
-<button class="tab" data-tab="r2">⚽ Rodada 2</button>
-<button class="tab" data-tab="rk">🏆 Ranking</button>
+  :root{
+    --bg: #0d0d0f;
+    --panel: #19191c;
+    --panel-2: #212124;
+    --border: #2c2c30;
+    --yellow: #ffd100;
+    --green: #39ff88;
+    --red: #ff4757;
+    --text: #f2f2f0;
+    --muted: #9a9aa1;
+  }
+  *{ -webkit-tap-highlight-color: transparent; }
+  html,body{ background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; }
+  .font-display{ font-family:'Oswald',sans-serif; letter-spacing:.02em; }
+  .panel{ background:var(--panel); border:1px solid var(--border); }
+  .panel-2{ background:var(--panel-2); border:1px solid var(--border); }
+
+  .road-divider{
+    height:3px;
+    background-image: repeating-linear-gradient(90deg, var(--yellow) 0 18px, transparent 18px 32px);
+    opacity:.9;
+  }
+
+  .bib{
+    background: var(--panel-2);
+    border:2px solid var(--yellow);
+    color: var(--yellow);
+    font-family:'Oswald',sans-serif;
+    transform: rotate(-3deg);
+  }
+
+  .bar-track{ background:#0a0a0b; border:1px solid var(--border); }
+  .bar-fill{ transition: width .5s ease; }
+
+  .btn-option{
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    transition: border-color .15s ease, transform .1s ease, background .15s ease;
+    text-align:left;
+  }
+  .btn-option:hover{ border-color:var(--yellow); background:#26262a; transform: translateX(2px); }
+  .btn-option:active{ transform: scale(.99); }
+
+  .btn-continuar{
+    background:var(--yellow); color:#141414; text-align:center;
+  }
+  .btn-continuar:hover{ filter:brightness(1.08); transform:none; }
+
+  .glow-yellow{ box-shadow: 0 0 0 1px rgba(255,209,0,.25); }
+
+  .tier-vitoria{ color:var(--yellow); }
+  .tier-podio{ color:#c9c9cd; }
+  .tier-top10{ color:var(--green); }
+  .tier-pelotao{ color:var(--muted); }
+  .tier-ausente{ color:var(--muted); font-style:italic; }
+
+  ::-webkit-scrollbar{ width:8px; height:8px; }
+  ::-webkit-scrollbar-thumb{ background:var(--border); border-radius:4px; }
+
+  .fade-in{ animation: fadeIn .35s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  @media (prefers-reduced-motion: reduce){
+    .fade-in{ animation:none; }
+    .bar-fill{ transition:none; }
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<div id="app" class="max-w-3xl mx-auto min-h-screen flex flex-col px-4 py-6 md:py-10">
+
+  <!-- ===================== TELA DE CRIAÇÃO DE PERSONAGEM ===================== -->
+  <div id="tela-criacao" class="flex-1 flex flex-col justify-center fade-in">
+    <div class="text-center mb-8">
+      <p class="font-display text-sm tracking-[0.35em] mb-1" style="color:var(--yellow)">PELOTÃO PROFISSIONAL</p>
+      <h1 class="font-display text-4xl md:text-5xl font-bold">DOMINGO DE FOGO</h1>
+      <p class="text-sm mt-2" style="color:var(--muted)">Sua carreira começa numa equipe Continental. O resto é calendário, ritmo e sorte.</p>
+    </div>
+
+    <div class="panel rounded-xl p-5 md:p-8 space-y-6">
+      <div>
+        <label class="block font-display text-sm mb-2 tracking-wide" style="color:var(--muted)">NOME DO CICLISTA</label>
+        <input id="input-nome" type="text" maxlength="24" placeholder="Ex: Mateus Albuquerque"
+          class="w-full rounded-lg px-4 py-3 bg-transparent panel-2 outline-none focus:border-yellow-400"
+          style="border:1px solid var(--border); color:var(--text);">
+      </div>
+
+      <div>
+        <label class="block font-display text-sm mb-3 tracking-wide" style="color:var(--muted)">ESCOLHA SUA VERTENTE</label>
+        <div id="opcoes-vertente" class="grid gap-3"></div>
+      </div>
+
+      <button id="btn-iniciar" disabled
+        class="w-full font-display text-lg py-3 rounded-lg font-semibold tracking-wide opacity-40 cursor-not-allowed transition"
+        style="background:var(--yellow); color:#141414;">
+        INICIAR CARREIRA
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== TELA DE JOGO ===================== -->
+  <div id="tela-jogo" class="hidden flex-1 flex-col gap-4">
+
+    <!-- PAINEL DE STATUS -->
+    <div class="panel rounded-xl p-4 md:p-5 fade-in">
+      <div class="flex items-start justify-between flex-wrap gap-2">
+        <div>
+          <h2 id="status-nome" class="font-display text-xl md:text-2xl font-bold leading-tight"></h2>
+          <p class="text-xs md:text-sm" style="color:var(--muted)">
+            <span id="status-equipe"></span> · <span id="status-papel"></span> · <span id="status-vertente"></span>
+          </p>
+        </div>
+        <div class="text-right">
+          <p class="font-display text-sm tracking-wide" style="color:var(--yellow)">TEMPORADA <span id="status-temporada"></span> · <span id="status-ano"></span></p>
+          <p class="text-xs" style="color:var(--muted)" id="status-fase"></p>
+        </div>
+      </div>
+
+      <div class="road-divider rounded-full my-4"></div>
+
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3" id="status-atributos"></div>
+    </div>
+
+    <!-- ÁREA DE EVENTO -->
+    <div id="card-evento" class="panel rounded-xl p-5 md:p-7 relative fade-in flex-1 flex flex-col">
+      <div class="flex items-start justify-between gap-4 mb-3">
+        <h3 id="evento-titulo" class="font-display text-2xl md:text-3xl font-bold pr-16"></h3>
+        <div class="bib rounded-md px-3 py-1.5 text-xs font-bold shrink-0 select-none">
+          <div class="text-[9px] leading-none opacity-70 text-center mb-0.5" id="evento-badge-topo">UCI PRO</div>
+          <div class="text-center leading-none text-base" id="evento-badge-fundo"></div>
+        </div>
+      </div>
+
+      <p id="evento-descricao" class="leading-relaxed mb-6" style="color:#d7d7d9"></p>
+
+      <div id="evento-opcoes" class="grid gap-3 mt-auto"></div>
+    </div>
+
+    <!-- LOG / NOTÍCIAS -->
+    <div class="panel-2 rounded-xl p-4 fade-in">
+      <p class="font-display text-xs tracking-[0.25em] mb-2" style="color:var(--muted)">ÚLTIMAS NOTÍCIAS DO PELOTÃO</p>
+      <div id="log-lista" class="space-y-1.5 text-sm"></div>
+    </div>
+  </div>
+
+  <!-- ===================== TELA DE FIM DE CARREIRA (banimento/dispensa) ===================== -->
+  <div id="tela-fim" class="hidden flex-1 flex flex-col justify-center items-center text-center fade-in gap-4">
+    <p class="font-display text-sm tracking-[0.35em]" style="color:var(--red)">FIM DE CARREIRA</p>
+    <h2 id="fim-titulo" class="font-display text-3xl md:text-4xl font-bold"></h2>
+    <p id="fim-texto" class="max-w-md" style="color:var(--muted)"></p>
+    <button id="btn-reiniciar" class="font-display mt-4 px-6 py-3 rounded-lg font-semibold tracking-wide"
+      style="background:var(--yellow); color:#141414;">
+      COMEÇAR NOVA CARREIRA
+    </button>
+  </div>
+
+  <!-- ===================== TELA DE LEGADO (aposentadoria) ===================== -->
+  <div id="tela-legado" class="hidden flex-1 flex-col gap-4 fade-in py-4">
+    <div class="panel rounded-xl p-5 md:p-7 flex flex-col md:flex-row gap-5 items-start">
+      <div class="shrink-0 panel-2 rounded-lg px-6 py-4 text-center" style="border:2px solid var(--yellow)">
+        <p class="text-[10px] tracking-widest" style="color:var(--muted)">GERAL</p>
+        <p class="font-display text-4xl font-bold" style="color:var(--yellow)" id="legado-geral"></p>
+      </div>
+      <div>
+        <p class="text-[10px] tracking-widest mb-1" style="color:var(--muted)">FIM DE CARREIRA</p>
+        <h2 class="font-display text-2xl md:text-3xl font-bold" id="legado-nome"></h2>
+        <p class="font-display text-lg md:text-xl" style="color:var(--yellow)" id="legado-tagline"></p>
+        <p class="text-xs mt-1" style="color:var(--muted)" id="legado-subtitulo"></p>
+        <p class="text-sm italic mt-3 border-l-2 pl-3" style="border-color:var(--yellow); color:#d7d7d9" id="legado-frase"></p>
+      </div>
+    </div>
+
+    <div class="panel rounded-xl p-5">
+      <p class="font-display text-xs tracking-[0.25em] mb-3" style="color:var(--muted)">NÚMEROS DA CARREIRA</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="legado-numeros"></div>
+    </div>
+
+    <div class="panel rounded-xl p-5">
+      <p class="font-display text-xs tracking-[0.25em] mb-3" style="color:var(--muted)">TÍTULOS POR PROVA</p>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="legado-titulos"></div>
+    </div>
+
+    <div class="panel rounded-xl p-5">
+      <p class="font-display text-xs tracking-[0.25em] mb-3" style="color:var(--muted)">TEMPORADA A TEMPORADA</p>
+      <div class="overflow-y-auto" id="legado-temporadas" style="max-height:320px"></div>
+    </div>
+
+    <button id="btn-nova-carreira-legado" class="font-display px-6 py-3 rounded-lg font-semibold tracking-wide self-start"
+      style="background:var(--yellow); color:#141414;">
+      COMEÇAR NOVA CARREIRA
+    </button>
+  </div>
+
 </div>
-<div class="panel hidden" id="namePanel">
-<label class="field" for="nome">Seu nome</label>
-<input id="nome" type="text" placeholder="Digite seu nome" autocomplete="name">
-<div class="nome-hint" id="nomeHint">Coloque seu nome antes de enviar.</div>
-<div class="progress-row"><div class="progress-txt"><b id="contar">0</b> <span id="contarLbl">de 24 jogos</span></div><div class="bar"><div class="bar-fill" id="barFill"></div></div></div>
-</div>
-<div id="sec-r1"></div>
-<div id="sec-r2" class="hidden"></div>
-<div id="sec-rk" class="hidden"></div>
-<footer>Palpites só são enviados quando você toca em "Enviar no WhatsApp".</footer>
-</div>
-<div class="sendbar hidden" id="sendbar">
-<div class="send-note" id="sendNote"></div>
-<div class="inner"><button class="btn btn-copy" id="btnCopy">Copiar</button><button class="btn btn-wa" id="btnWa">📲 Enviar no WhatsApp</button></div>
-</div>
+
 <script>
-const R1RES=[{"g": "A", "dia": "11/jun", "t1": "México", "f1": "🇲🇽", "t2": "África do Sul", "f2": "🇿🇦", "g1": 2, "g2": 0}, {"g": "A", "dia": "11/jun", "t1": "Coreia do Sul", "f1": "🇰🇷", "t2": "Rep. Tcheca", "f2": "🇨🇿", "g1": 2, "g2": 1}, {"g": "B", "dia": "12/jun", "t1": "Canadá", "f1": "🇨🇦", "t2": "Bósnia e Herz.", "f2": "🇧🇦", "g1": 1, "g2": 1}, {"g": "D", "dia": "12/jun", "t1": "Estados Unidos", "f1": "🇺🇸", "t2": "Paraguai", "f2": "🇵🇾", "g1": 4, "g2": 1}, {"g": "B", "dia": "13/jun", "t1": "Catar", "f1": "🇶🇦", "t2": "Suíça", "f2": "🇨🇭", "g1": 1, "g2": 1}, {"g": "C", "dia": "13/jun", "t1": "Brasil", "f1": "🇧🇷", "t2": "Marrocos", "f2": "🇲🇦", "g1": 1, "g2": 1}, {"g": "C", "dia": "13/jun", "t1": "Haiti", "f1": "🇭🇹", "t2": "Escócia", "f2": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "g1": 0, "g2": 1}, {"g": "D", "dia": "13/jun", "t1": "Austrália", "f1": "🇦🇺", "t2": "Turquia", "f2": "🇹🇷", "g1": 2, "g2": 0}, {"g": "E", "dia": "14/jun", "t1": "Alemanha", "f1": "🇩🇪", "t2": "Curaçao", "f2": "🇨🇼", "g1": 7, "g2": 1}, {"g": "F", "dia": "14/jun", "t1": "Holanda", "f1": "🇳🇱", "t2": "Japão", "f2": "🇯🇵", "g1": 2, "g2": 2}, {"g": "E", "dia": "14/jun", "t1": "Costa do Marfim", "f1": "🇨🇮", "t2": "Equador", "f2": "🇪🇨", "g1": 1, "g2": 0}, {"g": "F", "dia": "14/jun", "t1": "Suécia", "f1": "🇸🇪", "t2": "Tunísia", "f2": "🇹🇳", "g1": 5, "g2": 1}, {"g": "H", "dia": "15/jun", "t1": "Espanha", "f1": "🇪🇸", "t2": "Cabo Verde", "f2": "🇨🇻", "g1": null, "g2": null}, {"g": "G", "dia": "15/jun", "t1": "Bélgica", "f1": "🇧🇪", "t2": "Egito", "f2": "🇪🇬", "g1": null, "g2": null}, {"g": "H", "dia": "15/jun", "t1": "Arábia Saudita", "f1": "🇸🇦", "t2": "Uruguai", "f2": "🇺🇾", "g1": null, "g2": null}, {"g": "G", "dia": "15/jun", "t1": "Irã", "f1": "🇮🇷", "t2": "Nova Zelândia", "f2": "🇳🇿", "g1": null, "g2": null}, {"g": "I", "dia": "16/jun", "t1": "França", "f1": "🇫🇷", "t2": "Senegal", "f2": "🇸🇳", "g1": null, "g2": null}, {"g": "I", "dia": "16/jun", "t1": "Iraque", "f1": "🇮🇶", "t2": "Noruega", "f2": "🇳🇴", "g1": null, "g2": null}, {"g": "J", "dia": "16/jun", "t1": "Argentina", "f1": "🇦🇷", "t2": "Argélia", "f2": "🇩🇿", "g1": null, "g2": null}, {"g": "J", "dia": "16/jun", "t1": "Áustria", "f1": "🇦🇹", "t2": "Jordânia", "f2": "🇯🇴", "g1": null, "g2": null}, {"g": "K", "dia": "17/jun", "t1": "Portugal", "f1": "🇵🇹", "t2": "RD Congo", "f2": "🇨🇩", "g1": null, "g2": null}, {"g": "L", "dia": "17/jun", "t1": "Inglaterra", "f1": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "t2": "Croácia", "f2": "🇭🇷", "g1": null, "g2": null}, {"g": "L", "dia": "17/jun", "t1": "Gana", "f1": "🇬🇭", "t2": "Panamá", "f2": "🇵🇦", "g1": null, "g2": null}, {"g": "K", "dia": "17/jun", "t1": "Uzbequistão", "f1": "🇺🇿", "t2": "Colômbia", "f2": "🇨🇴", "g1": null, "g2": null}], R2=[{"g": "A", "dia": "18/jun", "t1": "Rep. Tcheca", "f1": "🇨🇿", "t2": "África do Sul", "f2": "🇿🇦"}, {"g": "B", "dia": "18/jun", "t1": "Suíça", "f1": "🇨🇭", "t2": "Bósnia e Herz.", "f2": "🇧🇦"}, {"g": "B", "dia": "18/jun", "t1": "Canadá", "f1": "🇨🇦", "t2": "Catar", "f2": "🇶🇦"}, {"g": "A", "dia": "18/jun", "t1": "México", "f1": "🇲🇽", "t2": "Coreia do Sul", "f2": "🇰🇷"}, {"g": "D", "dia": "19/jun", "t1": "Estados Unidos", "f1": "🇺🇸", "t2": "Austrália", "f2": "🇦🇺"}, {"g": "C", "dia": "19/jun", "t1": "Escócia", "f1": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "t2": "Marrocos", "f2": "🇲🇦"}, {"g": "C", "dia": "19/jun", "t1": "Brasil", "f1": "🇧🇷", "t2": "Haiti", "f2": "🇭🇹"}, {"g": "D", "dia": "19/jun", "t1": "Turquia", "f1": "🇹🇷", "t2": "Paraguai", "f2": "🇵🇾"}, {"g": "F", "dia": "20/jun", "t1": "Tunísia", "f1": "🇹🇳", "t2": "Japão", "f2": "🇯🇵"}, {"g": "F", "dia": "20/jun", "t1": "Holanda", "f1": "🇳🇱", "t2": "Suécia", "f2": "🇸🇪"}, {"g": "E", "dia": "20/jun", "t1": "Alemanha", "f1": "🇩🇪", "t2": "Costa do Marfim", "f2": "🇨🇮"}, {"g": "E", "dia": "20/jun", "t1": "Equador", "f1": "🇪🇨", "t2": "Curaçao", "f2": "🇨🇼"}, {"g": "H", "dia": "21/jun", "t1": "Espanha", "f1": "🇪🇸", "t2": "Arábia Saudita", "f2": "🇸🇦"}, {"g": "G", "dia": "21/jun", "t1": "Bélgica", "f1": "🇧🇪", "t2": "Irã", "f2": "🇮🇷"}, {"g": "H", "dia": "21/jun", "t1": "Uruguai", "f1": "🇺🇾", "t2": "Cabo Verde", "f2": "🇨🇻"}, {"g": "G", "dia": "21/jun", "t1": "Nova Zelândia", "f1": "🇳🇿", "t2": "Egito", "f2": "🇪🇬"}, {"g": "J", "dia": "22/jun", "t1": "Argentina", "f1": "🇦🇷", "t2": "Áustria", "f2": "🇦🇹"}, {"g": "I", "dia": "22/jun", "t1": "França", "f1": "🇫🇷", "t2": "Iraque", "f2": "🇮🇶"}, {"g": "I", "dia": "22/jun", "t1": "Noruega", "f1": "🇳🇴", "t2": "Senegal", "f2": "🇸🇳"}, {"g": "J", "dia": "22/jun", "t1": "Jordânia", "f1": "🇯🇴", "t2": "Argélia", "f2": "🇩🇿"}, {"g": "K", "dia": "23/jun", "t1": "Portugal", "f1": "🇵🇹", "t2": "Uzbequistão", "f2": "🇺🇿"}, {"g": "L", "dia": "23/jun", "t1": "Inglaterra", "f1": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "t2": "Gana", "f2": "🇬🇭"}, {"g": "L", "dia": "23/jun", "t1": "Panamá", "f1": "🇵🇦", "t2": "Croácia", "f2": "🇭🇷"}, {"g": "K", "dia": "23/jun", "t1": "Colômbia", "f1": "🇨🇴", "t2": "RD Congo", "f2": "🇨🇩"}], RANKING=[{"nome": "Felipe", "r1": 6, "r2": 0}, {"nome": "Fernando", "r1": 6, "r2": 0}, {"nome": "Yugi", "r1": 6, "r2": 0}, {"nome": "Matheus", "r1": 5, "r2": 0}, {"nome": "Luigi", "r1": 4, "r2": 0}, {"nome": "Giovani", "r1": 4, "r2": 0}];
-const ROUNDS={r2:{games:R2,label:"Rodada 2"}};
-const votos={r2:new Array(R2.length).fill(null)};
-let current="r1";
-function renderResults(){
-  const host=document.getElementById("sec-r1");let html="";let lastDia=null;
-  const played=R1RES.filter(j=>j.g1!==null).length;
-  html+=`<div class="secnote">Rodada 1 · <b>${played} de ${R1RES.length}</b> jogos realizados</div>`;
-  R1RES.forEach(j=>{
-    if(j.dia!==lastDia){html+=`<div class="day"><span class="dot"></span><span class="d">${j.dia}</span><span class="line"></span></div>`;lastDia=j.dia;}
-    const done=j.g1!==null;
-    let t1cls="team",t2cls="team",tag='<span class="res-tag pend">A jogar</span>',score='<div class="score pend">A JOGAR</div>',badge="";
-    if(done){
-      if(j.g1>j.g2){t1cls="team win";t2cls="team lose";tag='<span class="res-tag fim">Encerrado</span>';badge="🏆 "+j.t1;}
-      else if(j.g2>j.g1){t2cls="team win";t1cls="team lose";tag='<span class="res-tag fim">Encerrado</span>';badge="🏆 "+j.t2;}
-      else{tag='<span class="res-tag draw">Empate</span>';badge="Empate";}
-      score=`<div class="score">${j.g1}<span>–</span>${j.g2}</div>`;
+/* ============================================================
+   CONFIGURAÇÃO GERAL E ESTADO
+   ============================================================ */
+let gameState = null;
+
+const VERTENTES = [
+  {
+    id: "Grandes Voltas",
+    label: "Grandes Voltas",
+    desc: "Você sonha em vestir a camisa amarela. Escaladas de três semanas, contrarrelógios, sofrimento acumulado.",
+    base: { potencia: 55, explosao: 30, resistencia: 60, reputacao: 50, suspeitaDoping: 0 }
+  },
+  {
+    id: "Clássicas de Um Dia",
+    label: "Clássicas de Um Dia",
+    desc: "Paralelepípedos, vento lateral e uma corrida decidida em segundos. Tudo ou nada, uma vez por vez.",
+    base: { potencia: 45, explosao: 55, resistencia: 45, reputacao: 50, suspeitaDoping: 0 }
+  },
+  {
+    id: "Gregário de Luxo",
+    label: "Gregário de Luxo",
+    desc: "Você não corre pela vitória — corre para que outro vença. Sacrifício vira reputação, e reputação vira contrato.",
+    base: { potencia: 50, explosao: 45, resistencia: 55, reputacao: 60, suspeitaDoping: 0 }
+  }
+];
+
+const LABELS_ATRIBUTOS = {
+  potencia: "Potência",
+  explosao: "Explosão",
+  resistencia: "Resistência",
+  reputacao: "Reputação",
+  suspeitaDoping: "Susp. Doping"
+};
+
+/* Limiares de pontuação para cada tipo de prova */
+const LIMIARES = {
+  menor:     { vitoria: 88, podio: 75, top10: 58 },
+  especial:  { vitoria: 95, podio: 82, top10: 63 },
+  monumento: { vitoria: 100, podio: 85, top10: 65 },
+  grandvolta:{ vitoria: 92, podio: 78, top10: 60 }
+};
+
+/* O pelotão também evolui: a cada temporada os limiares sobem um pouco,
+   então manter o nível de vitórias exige continuar evoluindo o ciclista. */
+const INCREMENTO_POR_TEMPORADA = 2.2;
+const INCREMENTO_MAXIMO = 30;
+
+function limiarAjustado(tipo){
+  const base = LIMIARES[tipo];
+  const inc = Math.min(INCREMENTO_MAXIMO, (gameState.temporada - 1) * INCREMENTO_POR_TEMPORADA);
+  return {
+    vitoria: base.vitoria + inc,
+    podio: base.podio + inc * 0.85,
+    top10: base.top10 + inc * 0.7
+  };
+}
+
+/* Retornos decrescentes: passar de 80 num atributo ainda ajuda, mas cada vez menos —
+   evita que o ciclista vire "imbatível" só empilhando atributo. */
+function statEfetivo(valor){
+  return valor <= 80 ? valor : 80 + (valor - 80) * 0.35;
+}
+
+const MAX_TEMPORADAS = 14;
+
+/* Recompensa de reputação por tipo de prova / resultado */
+const RECOMPENSAS = {
+  menor:      { vitoria: 8,  podio: 5,  top10: 2, pelotao: 0  },
+  especial:   { vitoria: 14, podio: 9,  top10: 3, pelotao: -1 },
+  monumento:  { vitoria: 16, podio: 10, top10: 4, pelotao: -1 },
+  grandvolta: { vitoria: 25, podio: 15, top10: 6, pelotao: -2 }
+};
+
+const TIER_LABEL = {
+  vitoria: "🏆 Vitória",
+  podio:   "🥈 Pódio",
+  top10:   "Top 10",
+  pelotao: "No pelotão, sem destaque",
+  ausente: "Não participou (dispensa)"
+};
+
+const TIPO_LABEL_CURTO = {
+  menor: "PROVA",
+  especial: "ESPECIAL",
+  monumento: "MONUMENTO",
+  grandvolta: "GRAND TOUR"
+};
+
+/* ============================================================
+   EQUIPES REAIS — por faixa de força
+   ============================================================ */
+const EQUIPES_ELITE = [
+  { nome: "UAE Team Emirates", rating: 96 },
+  { nome: "Team Visma | Lease a Bike", rating: 94 },
+  { nome: "Ineos Grenadiers", rating: 88 },
+  { nome: "Soudal Quick-Step", rating: 85 }
+];
+const EQUIPES_FORTES = [
+  { nome: "Bora-Hansgrohe", rating: 82 },
+  { nome: "Lidl-Trek", rating: 80 },
+  { nome: "Alpecin-Deceuninck", rating: 81 },
+  { nome: "Groupama-FDJ", rating: 78 }
+];
+const EQUIPES_MEDIAS = [
+  { nome: "Movistar Team", rating: 66 },
+  { nome: "EF Education-EasyPost", rating: 72 },
+  { nome: "Israel-Premier Tech", rating: 60 },
+  { nome: "Cofidis", rating: 63 }
+];
+const EQUIPES_FRACAS = [
+  { nome: "Uno-X Mobility", rating: 52 },
+  { nome: "Team TotalEnergies", rating: 48 },
+  { nome: "Equipe Pro Team Vento Sul", rating: 38 }
+];
+
+/* ============================================================
+   BANCO DE CORRIDAS
+   ============================================================ */
+const CORRIDAS = {
+  strade_bianche: {
+    nome: "Strade Bianche", tipo: "especial",
+    pesos: { potencia: 0.45, explosao: 0.15, resistencia: 0.40 },
+    titulo: "Strade Bianche — Estradas Brancas da Toscana",
+    descricao: "Poeira, cascalho solto e as rampas da Via Santa Caterina esperando o pelotão em Siena. É a primeira grande prova do calendário e o corpo ainda não sabe bem o que esperar da temporada.",
+    opcoes: [
+      { texto: "Atacar nos setores de cascalho mais cedo", feedback: "Você arriscou nas estradas brancas antes da hora, tentando surpreender o pelotão.", efeitos: { resistencia: -6 }, tacticMod: 8 },
+      { texto: "Guardar forças para a subida final em Siena", feedback: "Você segurou o ritmo, apostando tudo na rampa final dentro da cidade murada.", efeitos: { resistencia: -3 }, tacticMod: 3 },
+      { texto: "Rodar protegido no pelotão o máximo possível", feedback: "Você se escondeu da poeira e do vento o quanto pôde, evitando desgaste.", efeitos: { resistencia: -1 }, tacticMod: -4 }
+    ]
+  },
+  milao_sanremo: {
+    nome: "Milão–Sanremo", tipo: "monumento",
+    pesos: { explosao: 0.5, resistencia: 0.3, potencia: 0.2 },
+    titulo: "Milão–Sanremo — A Clássica Mais Longa do Calendário",
+    descricao: "Quase 300km de estrada até a Via Roma, em Sanremo. O Poggio, a última subida antes da reta final, costuma decidir tudo em segundos.",
+    opcoes: [
+      { texto: "Atacar sozinho na descida do Poggio", feedback: "Você jogou tudo numa descida arriscada logo após o Poggio.", efeitos: { resistencia: -5 }, tacticMod: 7 },
+      { texto: "Guardar energia para o sprint na Via Roma", feedback: "Você poupou pernas para decidir tudo no sprint final.", efeitos: { resistencia: -2 }, tacticMod: 2 },
+      { texto: "Trabalhar para o velocista da equipe", feedback: "Você se dedicou a montar o trem de lead-out para o sprinter da equipe.", efeitos: { resistencia: -3, reputacao: 3 }, tacticMod: -3 }
+    ]
+  },
+  volta_catalunha: {
+    nome: "Volta à Catalunha", tipo: "menor",
+    pesos: { potencia: 0.4, resistencia: 0.4, explosao: 0.2 },
+    titulo: "Volta à Catalunha — Preparação na Costa Brava",
+    descricao: "Uma prova de uma semana, sem grande pressão de resultado, mas essencial para calibrar a forma antes das clássicas de pavé.",
+    opcoes: [
+      { texto: "Correr para o resultado geral", feedback: "Você decidiu brigar pela classificação geral, mesmo sendo uma prova de preparação.", efeitos: { resistencia: -5 }, tacticMod: 4 },
+      { texto: "Usar a prova só como treino de ritmo", feedback: "Você usou a semana como treino de carga, sem se expor demais.", efeitos: { resistencia: -1 }, tacticMod: -3 }
+    ]
+  },
+  ronde_flandres: {
+    nome: "Ronde van Vlaanderen", tipo: "monumento",
+    pesos: { potencia: 0.45, explosao: 0.25, resistencia: 0.3 },
+    titulo: "Ronde van Vlaanderen — Os Muros da Flandres",
+    descricao: "Oude Kwaremont, Paterberg, pavé estreito e rampas de até 20%. A Tour of Flanders separa quem tem pernas de quem só tem coragem.",
+    opcoes: [
+      { texto: "Atacar no Oude Kwaremont, longe da chegada", feedback: "Você disparou nos muros de pedra, longe demais da linha de chegada para muitos gostos.", efeitos: { resistencia: -7 }, tacticMod: 9 },
+      { texto: "Esperar o Paterberg para decidir tudo", feedback: "Você segurou o esforço para o último muro antes do final.", efeitos: { resistencia: -4 }, tacticMod: 4 },
+      { texto: "Ficar na roda dos favoritos até o fim", feedback: "Você marcou de perto os favoritos, deixando outros abrirem o ritmo.", efeitos: { resistencia: -2 }, tacticMod: -2 }
+    ]
+  },
+  paris_roubaix: {
+    nome: "Paris–Roubaix", tipo: "monumento",
+    pesos: { potencia: 0.35, resistencia: 0.45, explosao: 0.2 },
+    titulo: "Paris–Roubaix — O Inferno do Norte",
+    descricao: "Trouée d'Arenberg, poeira, pedras soltas e um velódromo esperando no fim. Aqui, mecânica e sorte pesam tanto quanto pernas.",
+    opcoes: [
+      { texto: "Entrar na frente na Trouée d'Arenberg, mesmo arriscando queda", feedback: "Você brigou por posição no setor mais perigoso da prova, sem se importar com o risco.", efeitos: { resistencia: -6 }, tacticMod: 9 },
+      { texto: "Poupar a bike, evitando os piores setores de pavé", feedback: "Você escolheu as linhas mais seguras, mesmo perdendo alguns metros.", efeitos: { resistencia: -3 }, tacticMod: -1 },
+      { texto: "Seguir o ritmo do grupo principal sem se expor", feedback: "Você se manteve no pelotão principal, evitando desgaste desnecessário.", efeitos: { resistencia: -2 }, tacticMod: -4 }
+    ]
+  },
+  liege_bastogne_liege: {
+    nome: "Liège–Bastogne–Liège", tipo: "monumento",
+    pesos: { potencia: 0.6, resistencia: 0.4 },
+    titulo: "Liège–Bastogne–Liège — A Doyenne das Ardenas",
+    descricao: "A mais antiga das clássicas, decidida na subida final de Saint-Nicolas, em Liège. Pura escalada curta e explosiva depois de mais de 250km.",
+    opcoes: [
+      { texto: "Atacar na Côte de la Redoute, ainda longe do fim", feedback: "Você atacou de longe, tentando fugir antes da subida decisiva.", efeitos: { resistencia: -7 }, tacticMod: 8 },
+      { texto: "Guardar tudo para Saint-Nicolas", feedback: "Você reservou cada watt para a última subida da prova.", efeitos: { resistencia: -3 }, tacticMod: 5 },
+      { texto: "Rodar no grupo, sem assumir riscos", feedback: "Você preferiu esperar os acontecimentos no pelotão principal.", efeitos: { resistencia: -1 }, tacticMod: -5 }
+    ]
+  },
+  dauphine: {
+    nome: "Critérium du Dauphiné", tipo: "menor",
+    pesos: { potencia: 0.4, resistencia: 0.35, explosao: 0.25 },
+    titulo: "Critérium du Dauphiné — O Ensaio Geral",
+    descricao: "A última grande prova antes do Tour de France. Muitos favoritos usam a semana só para medir a forma, sem se expor de verdade.",
+    opcoes: [
+      { texto: "Ir a fundo, testando os limites antes do Tour", feedback: "Você decidiu forçar a máquina, mesmo sabendo do desgaste que isso traria.", efeitos: { resistencia: -6 }, tacticMod: 5 },
+      { texto: "Poupar as pernas, de olho no Tour de France", feedback: "Você optou por administrar o esforço, pensando na prova maior do calendário.", efeitos: { resistencia: -1 }, tacticMod: -3 }
+    ]
+  },
+  mundial: {
+    nome: "Campeonato Mundial de Estrada", tipo: "especial",
+    pesos: { explosao: 0.4, potencia: 0.35, resistencia: 0.25 },
+    titulo: "Campeonato Mundial — A Camisa Arco-Íris",
+    descricao: "Sem equipe de clube aqui — só a seleção nacional. Vestir o arco-íris por um ano inteiro é um dos maiores prêmios do ciclismo mundial.",
+    opcoes: [
+      { texto: "Assumir a corrida para a seleção, indo para o ataque", feedback: "Você assumiu o papel de referência da seleção e foi para cima.", efeitos: { resistencia: -6 }, tacticMod: 8 },
+      { texto: "Trabalhar para o companheiro de seleção mais em forma", feedback: "Você abriu mão do protagonismo para trabalhar pelo colega mais forte do dia.", efeitos: { resistencia: -3, reputacao: 4 }, tacticMod: -5 },
+      { texto: "Guardar forças para um sprint de grupo reduzido", feedback: "Você apostou numa corrida de espera, mirando um sprint entre os sobreviventes.", efeitos: { resistencia: -2 }, tacticMod: 1 }
+    ]
+  },
+  lombardia: {
+    nome: "Il Lombardia", tipo: "monumento",
+    pesos: { potencia: 0.55, resistencia: 0.45 },
+    titulo: "Il Lombardia — A Corrida das Folhas Caídas",
+    descricao: "O último monumento do ano, em torno do Lago di Como. Subidas curtas e íngremes fecham a temporada de clássicas em outubro.",
+    opcoes: [
+      { texto: "Atacar no Muro di Sormano", feedback: "Você foi para cima na subida mais brutal da prova.", efeitos: { resistencia: -7 }, tacticMod: 8 },
+      { texto: "Esperar a descida final para decidir", feedback: "Você guardou energia para arriscar na descida técnica até Como.", efeitos: { resistencia: -3 }, tacticMod: 3 },
+      { texto: "Fechar a temporada com uma corrida discreta", feedback: "Depois de uma longa temporada, você preferiu não se arriscar demais.", efeitos: { resistencia: -1 }, tacticMod: -5 }
+    ]
+  },
+  olimpiada: {
+    nome: "Jogos Olímpicos — Ciclismo de Estrada", tipo: "especial",
+    pesos: { potencia: 0.4, explosao: 0.35, resistencia: 0.25 },
+    titulo: "Jogos Olímpicos — Prova de Estrada",
+    descricao: "Uma vez a cada quatro anos, o ciclismo divide os holofotes com o resto do esporte mundial. A seleção é pequena, e a pressão, gigantesca.",
+    opcoes: [
+      { texto: "Buscar a medalha, indo para o ataque", feedback: "Você decidiu brigar pela medalha olímpica, custe o que custar.", efeitos: { resistencia: -6 }, tacticMod: 9 },
+      { texto: "Correr de forma calculada, marcando os rivais", feedback: "Você preferiu uma corrida cautelosa, de olho nos principais rivais.", efeitos: { resistencia: -3 }, tacticMod: 2 },
+      { texto: "Trabalhar pelo companheiro de seleção", feedback: "Você abriu mão da própria chance para ajudar o colega de seleção.", efeitos: { resistencia: -3, reputacao: 5 }, tacticMod: -6 }
+    ]
+  },
+
+  giro_italia: {
+    nome: "Giro d'Italia", tipo: "grandvolta",
+    pesos: { potencia: 0.5, resistencia: 0.5 },
+    subEtapas: [
+      {
+        titulo: "Giro d'Italia — Etapa Rainha nas Dolomitas",
+        descricao: "Zoncolan ou Mortirolo, tanto faz o nome: a etapa mais dura do Giro sempre aparece no meio da terceira semana, quando as pernas já não são mais as mesmas.",
+        opcoes: [
+          { texto: "Atacar a 20km do topo, arriscando tudo", feedback: "Você atacou de longe na etapa rainha, sabendo que podia explodir antes do fim.", efeitos: { resistencia: -8 }, tacticMod: 9 },
+          { texto: "Marcar os rivais diretos e atacar só na reta final", feedback: "Você controlou os favoritos e reservou o ataque para os últimos metros.", efeitos: { resistencia: -4 }, tacticMod: 4 },
+          { texto: "Gerenciar prejuízo, pensando na classificação geral", feedback: "Você optou por limitar os danos, sem se expor além da conta.", efeitos: { resistencia: -2 }, tacticMod: -3 }
+        ]
+      },
+      {
+        titulo: "Giro d'Italia — Contrarrelógio Final em Roma",
+        descricao: "A última chance de embaralhar a classificação geral antes da chegada simbólica na capital italiana.",
+        opcoes: [
+          { texto: "Ir a fundo desde o primeiro quilômetro", feedback: "Você partiu no limite desde a largança da crono final.", efeitos: { resistencia: -6 }, tacticMod: 7 },
+          { texto: "Dosar o esforço ao longo do percurso", feedback: "Você distribuiu o esforço com cuidado ao longo da prova contra o relógio.", efeitos: { resistencia: -3 }, tacticMod: 3 },
+          { texto: "Rodar de forma conservadora, só para terminar bem", feedback: "Você preferiu preservar o corpo depois de três semanas de desgaste.", efeitos: { resistencia: -1 }, tacticMod: -4 }
+        ]
+      }
+    ]
+  },
+  tour_de_france: {
+    nome: "Tour de France", tipo: "grandvolta",
+    pesos: { potencia: 0.5, resistencia: 0.5 },
+    subEtapas: [
+      {
+        titulo: "Tour de France — Duelo no Alpe d'Huez",
+        descricao: "Os 21 hairpins mais famosos do ciclismo mundial, lotados de torcedores gritando o seu nome — ou o do rival ao seu lado.",
+        opcoes: [
+          { texto: "Atacar na primeira curva do Alpe d'Huez", feedback: "Você atacou já na base da subida mais icônica do Tour, sob os gritos da multidão.", efeitos: { resistencia: -8 }, tacticMod: 10 },
+          { texto: "Seguir o ritmo do favorito e atacar nos últimos hairpins", feedback: "Você deixou o rival puxar e guardou o golpe final para as últimas curvas.", efeitos: { resistencia: -4 }, tacticMod: 5 },
+          { texto: "Controlar a etapa pensando no dia seguinte", feedback: "Você optou por gerenciar esforço, de olho no restante da montanha pela frente.", efeitos: { resistencia: -2 }, tacticMod: -3 }
+        ]
+      },
+      {
+        titulo: "Tour de France — Reta Final nos Champs-Élysées",
+        descricao: "A última etapa, tradicionalmente decidida em um sprint sobre os paralelepípedos da avenida mais famosa de Paris, debaixo do Arco do Triunfo.",
+        opcoes: [
+          { texto: "Brigar pessoalmente pela vitória de etapa", feedback: "Mesmo exausto de três semanas de corrida, você foi para cima na etapa de Paris.", efeitos: { resistencia: -5 }, tacticMod: 6 },
+          { texto: "Fechar o trem de lead-out para o sprinter da equipe", feedback: "Você dedicou a última etapa a montar o trem para o velocista da equipe.", efeitos: { resistencia: -3, reputacao: 4 }, tacticMod: -2 },
+          { texto: "Apenas terminar em segurança, sem se arriscar", feedback: "Depois de semanas de sofrimento, você só queria cruzar a linha inteiro.", efeitos: { resistencia: 1 }, tacticMod: -5 }
+        ]
+      }
+    ]
+  },
+  vuelta_espana: {
+    nome: "Vuelta a España", tipo: "grandvolta",
+    pesos: { potencia: 0.5, resistencia: 0.5 },
+    subEtapas: [
+      {
+        titulo: "Vuelta a España — Rampa Brutal no Alto de l'Angliru",
+        descricao: "Rampas de até 23%, estrada estreita e um público que praticamente encosta no guidão. O Angliru é onde a Vuelta costuma se decidir.",
+        opcoes: [
+          { texto: "Atacar assim que a estrada aponta para cima", feedback: "Você atacou na base do Angliru, decidido a sofrer o quanto fosse preciso.", efeitos: { resistencia: -8 }, tacticMod: 9 },
+          { texto: "Segurar o próprio ritmo em uma subida tão extrema", feedback: "Você optou pelo próprio ritmo numa subida onde exagerar custa caro.", efeitos: { resistencia: -4 }, tacticMod: 4 },
+          { texto: "Ficar na roda e reagir só aos ataques dos rivais", feedback: "Você deixou os rivais decidirem o ritmo e apenas reagiu aos movimentos.", efeitos: { resistencia: -3 }, tacticMod: -2 }
+        ]
+      },
+      {
+        titulo: "Vuelta a España — Etapa Final em Madrid",
+        descricao: "A última etapa, decorativa na maior parte das voltas grandes, mas ainda com pontos e prestígio em jogo nas ruas de Madrid.",
+        opcoes: [
+          { texto: "Buscar a vitória de etapa em Madrid", feedback: "Mesmo com a geral definida, você quis fechar a Vuelta com uma vitória de etapa.", efeitos: { resistencia: -4 }, tacticMod: 6 },
+          { texto: "Rodar tranquilo, celebrando o fim da prova", feedback: "Você preferiu apenas aproveitar a última etapa, já satisfeito com a corrida.", efeitos: { resistencia: 1 }, tacticMod: -4 }
+        ]
+      }
+    ]
+  }
+};
+
+/* ============================================================
+   BANCO DE DECISÕES (EVENTOS FORA DAS CORRIDAS)
+   ============================================================ */
+const EVENTOS_DECISAO = {
+  semana_treino: {
+    id: "semana_treino",
+    titulo: "Pré-Temporada — Planejando os Meses à Frente",
+    descricao: "Sem corrida no calendário essa semana. O diretor esportivo pergunta como você quer distribuir a carga de treino antes do início da temporada.",
+    opcoes: [
+      { texto: "Foco em resistência — volume longo na estrada", feedback: "Você fechou a pré-temporada com volume alto de estrada.", efeitos: { resistencia: 6, explosao: -2 } },
+      { texto: "Foco em potência — séries curtas de subida", feedback: "Treino de força em subidas curtas e intensas.", efeitos: { potencia: 6, resistencia: -2 } },
+      { texto: "Foco em explosão — sprints e velocidade máxima", feedback: "Você priorizou séries de sprint e potência de curta duração.", efeitos: { explosao: 6, potencia: -2 } },
+      { texto: "Descanso ativo — priorizar recuperação", feedback: "Você priorizou o corpo antes de uma temporada longa.", efeitos: { resistencia: 4, suspeitaDoping: -6 } }
+    ]
+  },
+  dilema_dopagem: {
+    id: "dilema_dopagem",
+    titulo: "Bastidores — O Protocolo do Doutor Kessler",
+    descricao: "Depois do treino, o médico da equipe te chama para uma sala reservada. Ele fala baixo: existe um 'protocolo de recuperação' usado por alguns ciclistas do pelotão — não está na lista da agência antidopagem ainda, mas passa perto da linha.",
+    opcoes: [
+      { texto: "Aceitar o protocolo completo", feedback: "Você aceitou o protocolo do Dr. Kessler. Seu corpo responde como nunca — mas alguém sempre percebe.", efeitos: { potencia: 15, resistencia: 12, suspeitaDoping: 25 } },
+      { texto: "Aceitar só a parte 'legal', com moderação", feedback: "Você ficou só com os suplementos regulamentados, recusando o resto.", efeitos: { resistencia: 4, suspeitaDoping: 5 } },
+      { texto: "Recusar e denunciar à direção da equipe", feedback: "Você recusou e reportou o caso à diretoria. A equipe elogia sua postura.", efeitos: { reputacao: 10 } },
+      { texto: "Recusar em silêncio, sem criar caso", feedback: "Você disse não e saiu da sala sem alarde.", efeitos: {} }
+    ]
+  },
+  rivalidade_interna: {
+    id: "rivalidade_interna",
+    titulo: "Ônibus da Equipe — Rivalidade pela Liderança",
+    descricao: "Dois nomes da equipe vêm crescendo nos treinos e ambos acham que merecem ser o líder na próxima grande prova. Um deles é você.",
+    opcoes: [
+      { texto: "Confrontar o colega abertamente na reunião de equipe", feedback: "Você colocou a rivalidade em pauta na frente de todos, sem meias palavras.", efeitos: { reputacao: -3, potencia: 3 } },
+      { texto: "Deixar os resultados falarem por você nos próximos treinos", feedback: "Você preferiu responder com desempenho, sem criar atrito direto.", efeitos: { resistencia: 3 } },
+      { texto: "Propor dividir papéis com o colega, sem desgaste", feedback: "Você negociou uma divisão de responsabilidades com o rival interno.", efeitos: { reputacao: 4, potencia: -2 } }
+    ]
+  },
+  entrevista_polemica: {
+    id: "entrevista_polemica",
+    titulo: "Zona de Entrevistas — Pergunta Incômoda",
+    descricao: "Um jornalista pergunta, câmera ligada, o que você acha dos rumores de doping que cercam um dos favoritos da temporada.",
+    opcoes: [
+      { texto: "Criticar duramente o rival suspeito", feedback: "Você foi direto ao ponto, criticando publicamente o rival suspeito de doping.", efeitos: { reputacao: 5 } },
+      { texto: "Desconversar e elogiar o nível da competição", feedback: "Você desviou da pergunta com uma resposta diplomática de manual.", efeitos: {} },
+      { texto: "Defender o colega de pelotão publicamente", feedback: "Você saiu em defesa do rival, pedindo cautela até haver provas.", efeitos: { reputacao: 2 } }
+    ]
+  },
+  contratempo_fisico: {
+    id: "contratempo_fisico",
+    titulo: "Centro de Treinamento — Queda no Treino",
+    descricao: "Uma queda boba num treino de estrada deixa o corpo dolorido. Nada grave nos exames, mas o incômodo é real.",
+    opcoes: [
+      { texto: "Forçar o ritmo normal de treinos mesmo assim", feedback: "Você ignorou a dor e manteve a carga de treino cheia.", efeitos: { potencia: 4, resistencia: -6 } },
+      { texto: "Reduzir a carga e priorizar fisioterapia", feedback: "Você cortou volume de treino para se recuperar direito antes de forçar de novo.", efeitos: { resistencia: 3, potencia: -1 } },
+      { texto: "Esconder o incômodo da comissão técnica", feedback: "Você preferiu não contar nada à comissão técnica, com medo de perder espaço.", efeitos: { resistencia: -4, reputacao: -2 } }
+    ]
+  },
+  pressao_patrocinador: {
+    id: "pressao_patrocinador",
+    titulo: "Reunião de Marketing — Pressão do Patrocinador",
+    descricao: "O patrocinador principal da equipe pede mais presença em eventos e redes sociais, mesmo em plena temporada de treinos.",
+    opcoes: [
+      { texto: "Aceitar a agenda cheia de compromissos comerciais", feedback: "Você topou a agenda de marketing, mesmo às custas do descanso.", efeitos: { reputacao: 5, resistencia: -4 } },
+      { texto: "Negociar uma agenda mais leve com a equipe", feedback: "Você conseguiu reduzir os compromissos comerciais sem desagradar em excesso.", efeitos: { reputacao: 1 } },
+      { texto: "Recusar tudo, priorizando só o esporte", feedback: "Você recusou a maior parte da agenda comercial, focado apenas na bike.", efeitos: { reputacao: -3, resistencia: 2 } }
+    ]
+  },
+  conflito_diretor: {
+    id: "conflito_diretor",
+    titulo: "Rádio de Corrida — Ordem do Diretor Esportivo",
+    descricao: "No meio de uma prova qualquer da temporada, o diretor esportivo manda pelo rádio: pare de perseguir a fuga e volte para proteger o líder da equipe.",
+    opcoes: [
+      { texto: "Obedecer imediatamente a ordem de equipe", feedback: "Você obedeceu à ordem sem hesitar, voltando para proteger o líder.", efeitos: { reputacao: 5, resistencia: -3 } },
+      { texto: "Ignorar a ordem e seguir por conta própria", feedback: "Você decidiu seguir por conta própria, contrariando o rádio da equipe.", efeitos: { reputacao: -6, potencia: 3 } },
+      { texto: "Negociar pelo rádio um meio-termo", feedback: "Você argumentou pelo rádio e conseguiu um plano intermediário com o diretor.", efeitos: { reputacao: 1 } }
+    ]
+  },
+  oferta_extraoficial: {
+    id: "oferta_extraoficial",
+    titulo: "Hotel da Equipe — Abordagem Informal de Olheiro",
+    descricao: "Um olheiro de outra equipe se aproxima discretamente no lobby do hotel, ainda em plena temporada, sondando seu interesse numa mudança.",
+    opcoes: [
+      { texto: "Ouvir com atenção e trocar contatos", feedback: "Você ouviu a proposta informal e trocou contatos para o fim da temporada.", efeitos: { reputacao: 2 } },
+      { texto: "Recusar e avisar sua equipe atual sobre a abordagem", feedback: "Você recusou na hora e reportou o episódio à sua própria equipe.", efeitos: { reputacao: 6 } },
+      { texto: "Ignorar educadamente, sem dar satisfação a ninguém", feedback: "Você agradeceu, encerrou a conversa e seguiu como se nada tivesse acontecido.", efeitos: {} }
+    ]
+  },
+  crise_confianca: {
+    id: "crise_confianca",
+    titulo: "Sala da Comissão Técnica — Sequência de Resultados Fracos",
+    descricao: "Depois de um trecho ruim de temporada, a comissão técnica chama você para conversar sobre confiança, forma física e cabeça.",
+    opcoes: [
+      { texto: "Pedir apoio psicológico e rever a rotina", feedback: "Você aceitou apoio da equipe multidisciplinar para lidar com a fase ruim.", efeitos: { reputacao: 2, resistencia: 3 } },
+      { texto: "Insistir que está tudo bem e pedir mais treino", feedback: "Você minimizou o problema e pediu apenas para aumentar a carga de treino.", efeitos: { potencia: 2, resistencia: -3 } },
+      { texto: "Cobrar mais estrutura da equipe para virar o jogo", feedback: "Você usou a reunião para cobrar mais estrutura e apoio da própria equipe.", efeitos: { reputacao: -2 } }
+    ]
+  },
+  controle_antidoping: {
+    id: "controle_antidoping",
+    titulo: "Controle Antidoping Surpresa",
+    descricao: "Um agente da agência antidopagem aparece sem aviso, ainda no ônibus da equipe, para uma coleta de sangue e urina. Não há como recusar — só como reagir.",
+    opcoes: [
+      { texto: "Colaborar com calma e naturalidade", feedback: "Você fez a coleta com tranquilidade, como sempre faz.", efeitos: {} },
+      { texto: "Pedir um instante para se organizar antes", feedback: "Você pediu um instante, visivelmente tenso com a visita surpresa.", efeitos: { reputacao: -1 } }
+    ]
+  },
+  ajuste_temporada: {
+    id: "ajuste_temporada",
+    titulo: "Pausa Técnica — Ajustando o Meio da Temporada",
+    descricao: "Depois de um bloco intenso de provas, a comissão técnica reserva alguns dias de calendário livre para reavaliar a forma física antes da próxima grande fase.",
+    opcoes: [
+      { texto: "Bloco de recuperação total", feedback: "Você priorizou dias de recuperação total antes da próxima fase da temporada.", efeitos: { resistencia: 10, explosao: 4, potencia: 2 } },
+      { texto: "Ajuste fino de potência em altitude", feedback: "Você foi para um camp de altitude, com foco específico em potência.", efeitos: { potencia: 8, resistencia: 2 } },
+      { texto: "Ajuste fino de explosão em pista", feedback: "Você treinou em pista, com foco específico em explosão e velocidade máxima.", efeitos: { explosao: 8, resistencia: 2 } }
+    ]
+  },
+  reforco_elenco: {
+    id: "reforco_elenco",
+    titulo: "Mercado de Meio de Temporada — Reforço no Elenco",
+    descricao: "A equipe anuncia a contratação de um ciclista jovem e promissor para a mesma função que você exerce. A concorrência interna por vaga nas grandes provas aumenta.",
+    opcoes: [
+      { texto: "Encarar como motivação extra nos treinos", feedback: "Você usou a chegada do reforço como combustível extra nos treinos.", efeitos: { potencia: 3, resistencia: -2 } },
+      { texto: "Conversar abertamente com o novato sobre papéis", feedback: "Você conversou com o novo companheiro para alinhar expectativas sem desgaste.", efeitos: { reputacao: 3 } },
+      { texto: "Ignorar e manter a rotina normal", feedback: "Você optou por não dar atenção extra ao assunto e seguiu a rotina.", efeitos: {} }
+    ]
+  },
+  convocacao_extra: {
+    id: "convocacao_extra",
+    titulo: "Chamada de Última Hora — Prova Extra no Calendário",
+    descricao: "Um companheiro de equipe se machuca na véspera de uma corrida menor e a comissão técnica pergunta se você topa entrar no lugar dele, fora do planejamento original.",
+    opcoes: [
+      { texto: "Topar a prova extra, mesmo sem estar 100%", feedback: "Você aceitou a corrida extra de última hora, mesmo com o corpo cansado.", efeitos: { resistencia: -8, reputacao: 5 } },
+      { texto: "Recusar, alegando necessidade de descanso", feedback: "Você recusou a chamada extra para preservar o corpo para os objetivos principais.", efeitos: { resistencia: 4, reputacao: -2 } }
+    ]
+  },
+  patrocinio_pessoal: {
+    id: "patrocinio_pessoal",
+    titulo: "Escritório do Empresário — Patrocínio Pessoal",
+    descricao: "Uma marca de equipamentos esportivos oferece um contrato de patrocínio pessoal, paralelo ao da equipe, com uma cláusula de exclusividade de imagem que incomoda a diretoria.",
+    opcoes: [
+      { texto: "Assinar o patrocínio pessoal", feedback: "Você assinou o contrato pessoal, mesmo gerando desconforto interno na equipe.", efeitos: { reputacao: -3 } },
+      { texto: "Recusar para não gerar atrito com a equipe", feedback: "Você recusou o patrocínio pessoal para manter a relação com a equipe em dia.", efeitos: { reputacao: 3 } }
+    ]
+  },
+  desgaste_mental: {
+    id: "desgaste_mental",
+    titulo: "Rotina de Viagens — Sinais de Desgaste",
+    descricao: "Depois de tantas semanas seguidas na estrada, hotéis e aeroportos, o cansaço deixou de ser só físico. A equipe percebe uma queda de ânimo nos treinos.",
+    opcoes: [
+      { texto: "Tirar alguns dias de folga com a família", feedback: "Você tirou alguns dias de folga para recarregar a cabeça antes de voltar aos treinos.", efeitos: { resistencia: 6, potencia: -1 } },
+      { texto: "Seguir o calendário normalmente, sem parar", feedback: "Você decidiu não parar, mesmo sentindo o peso da rotina de viagens.", efeitos: { resistencia: -5, reputacao: 2 } }
+    ]
+  },
+  mudanca_equipamento: {
+    id: "mudanca_equipamento",
+    titulo: "Camp de Equipe — Novo Equipamento",
+    descricao: "O patrocinador técnico da equipe libera uma bike e um conjunto de rodas totalmente novos. O ganho de performance é real, mas exige tempo de adaptação.",
+    opcoes: [
+      { texto: "Migrar direto para o novo equipamento nas próximas provas", feedback: "Você trocou de equipamento de imediato, apostando no ganho técnico.", efeitos: { potencia: 4, explosao: 2, resistencia: -3 } },
+      { texto: "Fazer a transição aos poucos, com cautela", feedback: "Você optou por uma transição gradual para o novo material.", efeitos: { potencia: 2 } }
+    ]
+  }
+};
+
+const POOL_DECISOES_ALEATORIAS = [
+  "rivalidade_interna", "entrevista_polemica", "contratempo_fisico",
+  "pressao_patrocinador", "conflito_diretor", "oferta_extraoficial", "crise_confianca",
+  "reforco_elenco", "convocacao_extra", "patrocinio_pessoal", "desgaste_mental", "mudanca_equipamento"
+];
+
+/* ============================================================
+   UTILITÁRIOS
+   ============================================================ */
+function clamp(v){ return Math.max(0, Math.min(100, v)); }
+
+function aplicarEfeitos(efeitos){
+  for (const chave in efeitos){
+    if (chave in gameState.atributos){
+      gameState.atributos[chave] = clamp(gameState.atributos[chave] + efeitos[chave]);
     }
-    html+=`<div class="match"><div class="match-top"><span class="grp">Grupo ${j.g}</span>${tag}</div>
-    <div class="teams res-teams"><div class="${t1cls}"><span class="flag">${j.f1}</span><span class="nm">${j.t1}</span></div>${score}<div class="${t2cls}"><span class="flag">${j.f2}</span><span class="nm">${j.t2}</span></div></div>
-    <div class="win-badge">${badge}</div></div>`;
+  }
+}
+
+function adicionarLog(texto){
+  gameState.log.unshift(texto);
+  gameState.log = gameState.log.slice(0, 3);
+}
+
+function shuffle(array){
+  const a = [...array];
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function proximaDecisaoAleatoria(){
+  if (gameState.filaDecisoes.length === 0){
+    gameState.filaDecisoes = shuffle(POOL_DECISOES_ALEATORIAS);
+  }
+  return gameState.filaDecisoes.pop();
+}
+
+/* ============================================================
+   TELA DE CRIAÇÃO
+   ============================================================ */
+let vertenteEscolhida = null;
+
+function montarOpcoesVertente(){
+  const container = document.getElementById("opcoes-vertente");
+  container.innerHTML = "";
+  VERTENTES.forEach(v => {
+    const btn = document.createElement("button");
+    btn.className = "btn-option rounded-lg px-4 py-3 w-full";
+    btn.dataset.id = v.id;
+    btn.innerHTML = `
+      <div class="font-display font-semibold text-base">${v.label}</div>
+      <div class="text-xs mt-1" style="color:var(--muted)">${v.desc}</div>
+    `;
+    btn.addEventListener("click", () => {
+      vertenteEscolhida = v;
+      document.querySelectorAll("#opcoes-vertente button").forEach(b => {
+        b.classList.remove("glow-yellow");
+        b.style.borderColor = "var(--border)";
+      });
+      btn.classList.add("glow-yellow");
+      btn.style.borderColor = "var(--yellow)";
+      atualizarBotaoIniciar();
+    });
+    container.appendChild(btn);
   });
-  host.innerHTML=html;
 }
-function renderRound(key){
-  const R=ROUNDS[key].games; const host=document.getElementById("sec-"+key);
-  let html=""; let lastDia=null;
-  R.forEach((j,i)=>{
-    if(j.dia!==lastDia){html+=`<div class="day"><span class="dot"></span><span class="d">${j.dia}</span><span class="line"></span></div>`;lastDia=j.dia;}
-    html+=`<div class="match"><div class="match-top"><span class="grp">Grupo ${j.g}</span><span class="vote-tag" id="tag-${key}-${i}"></span></div>
-    <div class="teams"><div class="team"><span class="flag">${j.f1}</span><span class="nm">${j.t1}</span></div><div class="vs">×</div><div class="team"><span class="flag">${j.f2}</span><span class="nm">${j.t2}</span></div></div>
-    <div class="picks"><button class="pick" data-k="${key}" data-i="${i}" data-v="1">Vitória</button><button class="pick mid" data-k="${key}" data-i="${i}" data-v="X">×</button><button class="pick" data-k="${key}" data-i="${i}" data-v="2">Vitória</button></div></div>`;
-  });
-  host.innerHTML=html;
+
+function atualizarBotaoIniciar(){
+  const nome = document.getElementById("input-nome").value.trim();
+  const btn = document.getElementById("btn-iniciar");
+  if (nome.length > 0 && vertenteEscolhida){
+    btn.disabled = false;
+    btn.classList.remove("opacity-40", "cursor-not-allowed");
+  } else {
+    btn.disabled = true;
+    btn.classList.add("opacity-40", "cursor-not-allowed");
+  }
 }
-function renderRanking(){
-  const data=RANKING.map(p=>({...p,total:p.r1+p.r2})).sort((a,b)=>b.total-a.total);
-  data.forEach(p=>{p.pos=1+data.filter(q=>q.total>p.total).length;});
-  const top=data.slice(0,3);const order=[top[1],top[0],top[2]].filter(Boolean);const medals={0:"🥇",1:"🥈",2:"🥉"};
-  let pod='<div class="podium">';
-  order.forEach(p=>{const realIdx=data.indexOf(p);const cls=realIdx===0?"p1":realIdx===1?"p2":"p3";
-    pod+=`<div class="pod ${cls}"><div class="rkpos">${p.pos}º</div><div class="medal">${medals[realIdx]}</div><div class="pname">${p.nome}</div><div class="ppts">${p.total} ${p.total===1?"acerto":"acertos"}</div></div>`;});
-  pod+='</div>';
-  let tbl='<div class="rktable"><div class="rkrow head"><div class="pos">#</div><div class="nm">Palpiteiro</div><div class="v">R1</div><div class="v">R2</div><div class="tot">Total</div></div>';
-  data.forEach(p=>{tbl+=`<div class="rkrow ${p.pos===1?'lead':''}"><div class="pos">${p.pos}º</div><div class="nm">${p.nome}</div><div class="v">${p.r1}</div><div class="v">${p.r2}</div><div class="tot">${p.total}</div></div>`;});
-  tbl+='</div>';
-  document.getElementById("sec-rk").innerHTML=
-    `<div class="rk-head"><h2 style="margin:4px 0;font-size:20px;">🏆 Ranking Geral</h2></div>
-     <div class="rk-sub">Soma de acertos de todas as rodadas</div>${pod}${tbl}
-     <div class="rk-note">Cada acerto de palpite (vitória, empate ou derrota) vale 1 ponto.<br>Atualizado conforme os jogos acontecem.</div>`;
-}
-function refresh(){
-  if(current!=="r2")return;
-  const arr=votos.r2;const n=arr.filter(v=>v!==null).length;const tot=arr.length;
-  document.getElementById("contar").textContent=n;
-  document.getElementById("contarLbl").textContent="de "+tot+" jogos · Rodada 2";
-  document.getElementById("barFill").style.width=(n/tot*100)+"%";
-}
-document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");
-  current=t.dataset.tab;
-  document.getElementById("sec-r1").classList.toggle("hidden",current!=="r1");
-  document.getElementById("sec-r2").classList.toggle("hidden",current!=="r2");
-  document.getElementById("sec-rk").classList.toggle("hidden",current!=="rk");
-  const voting=current==="r2";
-  document.getElementById("namePanel").classList.toggle("hidden",!voting);
-  document.getElementById("sendbar").classList.toggle("hidden",!voting);
-  refresh();
-}));
-document.addEventListener("click",e=>{
-  const b=e.target.closest(".pick");if(!b)return;
-  const k=b.dataset.k,i=+b.dataset.i,v=b.dataset.v;
-  votos[k][i]=(votos[k][i]===v)?null:v;
-  const card=b.closest(".match");
-  card.querySelectorAll(".pick").forEach(p=>p.classList.toggle("sel",votos[k][i]!==null&&p.dataset.v===votos[k][i]));
-  const tag=document.getElementById(`tag-${k}-${i}`);const j=ROUNDS[k].games[i];
-  const txt=votos[k][i]==="1"?j.t1:votos[k][i]==="2"?j.t2:votos[k][i]==="X"?"Empate":"";
-  tag.textContent=txt?"✔ "+txt:"";tag.classList.toggle("show",!!txt);
-  refresh();
+
+document.getElementById("input-nome").addEventListener("input", atualizarBotaoIniciar);
+
+document.getElementById("btn-iniciar").addEventListener("click", () => {
+  const nome = document.getElementById("input-nome").value.trim();
+  if (!nome || !vertenteEscolhida) return;
+
+  gameState = {
+    nome: nome,
+    vertente: vertenteEscolhida.id,
+    equipe: "Equipe Continental Raízes do Sul",
+    equipeRating: 30,
+    papel: "Líder",
+    ano: 2026,
+    temporada: 1,
+    atributos: { ...vertenteEscolhida.base },
+    log: [],
+    gameOver: false,
+    filaDecisoes: [],
+    resultadosTemporada: [],
+    calendario: null,
+    blocoIndex: 0,
+    itemIndex: 0,
+    faseAtual: null,
+    grandVoltaTemp: null,
+    eventoForcado: null,
+    corridasVisitadas: {},
+    historicoTemporadas: [],
+    titulosPorProva: {},
+    estatisticasCarreira: { corridas: 0, vitorias: 0, podios: 0, top10: 0, pelotao: 0, ausencias: 0 }
+  };
+
+  adicionarLog(`${nome} assina seu primeiro contrato profissional na ${gameState.equipe}, como especialista em ${vertenteEscolhida.label}.`);
+
+  gameState.calendario = construirCalendarioTemporada(gameState.ano);
+
+  document.getElementById("tela-criacao").classList.add("hidden");
+  document.getElementById("tela-jogo").classList.remove("hidden");
+  document.getElementById("tela-jogo").classList.add("flex");
+
+  renderStatus();
+  avancarCalendario();
 });
-function montar(){
-  const nome=document.getElementById("nome").value.trim();const R=ROUNDS.r2;const arr=votos.r2;
-  let txt=`🏆 BOLÃO COPA 2026 — ${R.label}\n👤 ${nome}\n`;let dia=null;
-  R.games.forEach((j,i)=>{if(j.dia!==dia){txt+="\n📅 "+j.dia+"\n";dia=j.dia;}
-    const v=arr[i];const esc=v==="1"?(j.f1+" "+j.t1):v==="2"?(j.f2+" "+j.t2):v==="X"?"✖️ Empate":"— (sem palpite)";
-    txt+=`${j.g} • ${j.t1} x ${j.t2} → ${esc}\n`;});
-  txt+=`\n(${arr.filter(v=>v!==null).length}/${arr.length} jogos)`;return txt;
+
+/* ============================================================
+   CALENDÁRIO DA TEMPORADA
+   ============================================================ */
+function construirCalendarioTemporada(ano){
+  const bloco1 = [
+    { tipo: "decisao", id: "semana_treino" },
+    { tipo: "corrida", id: "strade_bianche" },
+    { tipo: "decisao", id: "__random__" },
+    { tipo: "corrida", id: "milao_sanremo" },
+    { tipo: "decisao", id: "__random__" },
+    { tipo: "corrida", id: "volta_catalunha" },
+    { tipo: "corrida", id: "ronde_flandres" },
+    { tipo: "decisao", id: "dilema_dopagem" },
+    { tipo: "corrida", id: "paris_roubaix" },
+    { tipo: "decisao", id: "__random__" },
+    { tipo: "corrida", id: "liege_bastogne_liege" },
+    { tipo: "decisao", id: "__random__" },
+    { tipo: "corrida", id: "giro_italia" }
+  ];
+  const bloco2 = [
+    { tipo: "decisao", id: "ajuste_temporada" },
+    { tipo: "corrida", id: "dauphine" },
+    { tipo: "decisao", id: "__random__" },
+    { tipo: "corrida", id: "tour_de_france" }
+  ];
+  const bloco3 = [ { tipo: "decisao", id: "ajuste_temporada" } ];
+  if (ano % 4 === 0){
+    bloco3.push({ tipo: "corrida", id: "olimpiada" });
+  }
+  bloco3.push({ tipo: "decisao", id: "__random__" });
+  bloco3.push({ tipo: "corrida", id: "vuelta_espana" });
+  bloco3.push({ tipo: "decisao", id: "__random__" });
+  bloco3.push({ tipo: "corrida", id: "mundial" });
+  bloco3.push({ tipo: "corrida", id: "lombardia" });
+
+  return [
+    { fase: "Clássicas & Giro d'Italia", itens: bloco1 },
+    { fase: "Tour de France", itens: bloco2 },
+    { fase: "Vuelta a España & Mundial", itens: bloco3 }
+  ];
 }
-function validar(){const nome=document.getElementById("nome").value.trim();const inp=document.getElementById("nome");const h=document.getElementById("nomeHint");
-  if(!nome){inp.classList.add("warn");h.classList.add("show");inp.scrollIntoView({behavior:"smooth",block:"center"});inp.focus();return false;}
-  inp.classList.remove("warn");h.classList.remove("show");return true;}
-function nota(){const arr=votos.r2;const n=arr.filter(v=>v!==null).length;const el=document.getElementById("sendNote");
-  if(n<arr.length){el.textContent=`Você votou em ${n} de ${arr.length} — os demais vão como "sem palpite".`;el.classList.add("warn");}
-  else{el.textContent=`Tudo pronto! ${arr.length} de ${arr.length} jogos da Rodada 2.`;el.classList.remove("warn");}}
-document.getElementById("btnWa").addEventListener("click",()=>{if(!validar())return;nota();window.open("https://wa.me/?text="+encodeURIComponent(montar()),"_blank");});
-document.getElementById("btnCopy").addEventListener("click",async()=>{if(!validar())return;nota();const btn=document.getElementById("btnCopy");
-  try{await navigator.clipboard.writeText(montar());}catch(e){const ta=document.createElement("textarea");ta.value=montar();document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);}
-  btn.textContent="Copiado ✓";btn.classList.add("done");setTimeout(()=>{btn.textContent="Copiar";btn.classList.remove("done");},1800);});
-document.getElementById("nome").addEventListener("input",()=>{const inp=document.getElementById("nome");if(inp.value.trim()){inp.classList.remove("warn");document.getElementById("nomeHint").classList.remove("show");}});
-renderResults();renderRound("r2");renderRanking();refresh();
-</script></body></html>
+
+function aplicarRecuperacaoPassiva(){
+  const atr = gameState.atributos;
+  atr.resistencia = clamp(atr.resistencia + 2);
+  atr.explosao = clamp(atr.explosao + 1);
+}
+
+function avancarCalendario(){
+  aplicarRecuperacaoPassiva();
+
+  if (gameState.eventoForcado){
+    const id = gameState.eventoForcado;
+    gameState.eventoForcado = null;
+    renderDecisao(EVENTOS_DECISAO[id]);
+    return;
+  }
+
+  let blocoAtual = gameState.calendario[gameState.blocoIndex];
+
+  if (gameState.itemIndex >= blocoAtual.itens.length){
+    gameState.blocoIndex += 1;
+    gameState.itemIndex = 0;
+    if (gameState.blocoIndex >= gameState.calendario.length){
+      finalizarTemporada();
+      return;
+    }
+    blocoAtual = gameState.calendario[gameState.blocoIndex];
+    gameState.faseAtual = blocoAtual.fase;
+    adicionarLog(`Início da fase: ${blocoAtual.fase}.`);
+  }
+
+  if (!gameState.faseAtual){
+    gameState.faseAtual = blocoAtual.fase;
+  }
+
+  const item = blocoAtual.itens[gameState.itemIndex];
+  gameState.itemIndex += 1;
+
+  renderStatus();
+  renderLog();
+
+  if (item.tipo === "decisao"){
+    const id = item.id === "__random__" ? proximaDecisaoAleatoria() : item.id;
+    renderDecisao(EVENTOS_DECISAO[id]);
+  } else {
+    const corrida = CORRIDAS[item.id];
+    if (corrida.tipo === "grandvolta"){
+      gameState.grandVoltaTemp = { tacticSum: 0, count: 0 };
+      renderCorridaGrandVolta(corrida, 0);
+    } else {
+      renderCorridaUmDia(corrida);
+    }
+  }
+}
+
+/* ============================================================
+   PONTUAÇÃO E RESULTADOS DE CORRIDA
+   ============================================================ */
+function papelModificador(){
+  if (gameState.papel === "Gregário"){
+    return gameState.vertente === "Gregário de Luxo" ? -3 : -9;
+  }
+  if (gameState.papel === "Co-líder") return -3;
+  return 0;
+}
+
+function bonusVertente(tipo){
+  if (gameState.vertente === "Grandes Voltas" && tipo === "grandvolta") return 6;
+  if (gameState.vertente === "Clássicas de Um Dia" && (tipo === "monumento" || tipo === "especial")) return 6;
+  return 0;
+}
+
+function calcularScore(pesos, tipo, tacticMod){
+  const atr = gameState.atributos;
+  const base = statEfetivo(atr.potencia) * (pesos.potencia || 0) + statEfetivo(atr.explosao) * (pesos.explosao || 0) + statEfetivo(atr.resistencia) * (pesos.resistencia || 0);
+  const teamBonus = (gameState.equipeRating - 50) / 6;
+  const papelMod = papelModificador();
+  const vertBonus = bonusVertente(tipo);
+  const rand = Math.floor(Math.random() * 25) - 12;
+  return base + teamBonus + papelMod + vertBonus + tacticMod + rand;
+}
+
+function determinarTier(tipo, score){
+  const t = limiarAjustado(tipo);
+  if (score >= t.vitoria) return "vitoria";
+  if (score >= t.podio) return "podio";
+  if (score >= t.top10) return "top10";
+  return "pelotao";
+}
+
+function atualizarRatingEquipe(tipo, tier){
+  if (gameState.papel !== "Líder") return;
+  if (tipo !== "monumento" && tipo !== "grandvolta" && tipo !== "especial") return;
+  const ganho = tipo === "grandvolta" ? 3 : 2;
+  if (tier === "vitoria"){
+    gameState.equipeRating = clamp(gameState.equipeRating + ganho);
+  } else if (tier === "pelotao"){
+    gameState.equipeRating = clamp(gameState.equipeRating - 1);
+  }
+}
+
+function principalAtributo(pesos){
+  return Object.keys(pesos).reduce((a, b) => (pesos[a] || 0) >= (pesos[b] || 0) ? a : b);
+}
+
+function resolverResultado(nomeExibicao, tipo, pesos, tacticMod){
+  const score = calcularScore(pesos, tipo, tacticMod);
+  const tier = determinarTier(tipo, score);
+  let recompensa = RECOMPENSAS[tipo][tier];
+  if (gameState.papel === "Gregário" && gameState.vertente === "Gregário de Luxo"){
+    recompensa += 2;
+  }
+  gameState.atributos.reputacao = clamp(gameState.atributos.reputacao + recompensa);
+  if (gameState.atributos.suspeitaDoping > 0){
+    gameState.atributos.suspeitaDoping = clamp(gameState.atributos.suspeitaDoping - 1);
+  }
+
+  let atributoGanho = null;
+  let ganho = 0;
+  if (tier === "vitoria" || tier === "podio"){
+    atributoGanho = principalAtributo(pesos);
+    ganho = tier === "vitoria" ? 4 : 2;
+    gameState.atributos[atributoGanho] = clamp(gameState.atributos[atributoGanho] + ganho);
+  }
+
+  atualizarRatingEquipe(tipo, tier);
+  gameState.resultadosTemporada.push({ nome: nomeExibicao, tipo, tier });
+
+  gameState.estatisticasCarreira.corridas += 1;
+  gameState.estatisticasCarreira[tier] += 1;
+  if (tier === "vitoria"){
+    gameState.titulosPorProva[nomeExibicao] = (gameState.titulosPorProva[nomeExibicao] || 0) + 1;
+  }
+
+  if (gameState.atributos.suspeitaDoping >= 55 && Math.random() < 0.3){
+    gameState.eventoForcado = "controle_antidoping";
+  }
+
+  return { score, tier, recompensa, atributoGanho, ganho };
+}
+
+/* ============================================================
+   RENDER — PAINEL DE STATUS
+   ============================================================ */
+function corBarra(chave, valor){
+  if (chave === "suspeitaDoping"){
+    if (valor >= 70) return "var(--red)";
+    if (valor >= 35) return "#ffb84d";
+    return "var(--green)";
+  }
+  if (valor < 25) return "var(--red)";
+  if (valor < 55) return "#ffb84d";
+  return "var(--green)";
+}
+
+function renderStatus(){
+  document.getElementById("status-nome").textContent = gameState.nome;
+  document.getElementById("status-equipe").textContent = gameState.equipe;
+  document.getElementById("status-papel").textContent = gameState.papel;
+  document.getElementById("status-vertente").textContent = gameState.vertente;
+  document.getElementById("status-temporada").textContent = gameState.temporada;
+  document.getElementById("status-ano").textContent = gameState.ano;
+  document.getElementById("status-fase").textContent = gameState.faseAtual ? "Fase: " + gameState.faseAtual : "Pré-temporada";
+
+  const container = document.getElementById("status-atributos");
+  container.innerHTML = "";
+  Object.keys(gameState.atributos).forEach(chave => {
+    const valor = gameState.atributos[chave];
+    const cor = corBarra(chave, valor);
+    const item = document.createElement("div");
+    item.className = "panel-2 rounded-lg px-3 py-2";
+    item.innerHTML = `
+      <div class="flex justify-between items-baseline mb-1.5">
+        <span class="text-[11px] font-display tracking-wide" style="color:var(--muted)">${LABELS_ATRIBUTOS[chave]}</span>
+        <span class="text-xs font-semibold" style="color:${cor}">${valor}</span>
+      </div>
+      <div class="bar-track rounded-full h-2 overflow-hidden">
+        <div class="bar-fill h-full rounded-full" style="width:${valor}%; background:${cor}"></div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+function renderLog(){
+  const container = document.getElementById("log-lista");
+  container.innerHTML = "";
+  if (gameState.log.length === 0){
+    container.innerHTML = `<p style="color:var(--muted)">Nenhuma notícia ainda. A temporada está só começando.</p>`;
+    return;
+  }
+  gameState.log.forEach(item => {
+    const p = document.createElement("p");
+    p.className = "leading-snug";
+    p.style.color = "#c9c9cd";
+    p.textContent = "• " + item;
+    container.appendChild(p);
+  });
+}
+
+/* ============================================================
+   RENDER — CARD DE EVENTO (genérico)
+   ============================================================ */
+function setBadge(topo, fundo){
+  document.getElementById("evento-badge-topo").textContent = topo;
+  document.getElementById("evento-badge-fundo").textContent = fundo;
+}
+
+function reanimarCard(){
+  const card = document.getElementById("card-evento");
+  card.classList.remove("fade-in");
+  void card.offsetWidth;
+  card.classList.add("fade-in");
+}
+
+function montarBotoesOpcoes(opcoes, aoClicar){
+  const container = document.getElementById("evento-opcoes");
+  container.innerHTML = "";
+  opcoes.forEach(opcao => {
+    const btn = document.createElement("button");
+    btn.className = "btn-option rounded-lg px-4 py-3 w-full font-medium";
+    btn.textContent = opcao.texto;
+    btn.addEventListener("click", () => aoClicar(opcao));
+    container.appendChild(btn);
+  });
+}
+
+/* ============================================================
+   RENDER — DECISÕES (fora de corrida)
+   ============================================================ */
+function renderDecisao(evento){
+  document.getElementById("evento-titulo").textContent = evento.titulo;
+  document.getElementById("evento-descricao").textContent = evento.descricao;
+  setBadge("TEMPORADA", gameState.temporada);
+  montarBotoesOpcoes(evento.opcoes, opcao => escolherOpcaoDecisao(evento, opcao));
+  reanimarCard();
+}
+
+function escolherOpcaoDecisao(evento, opcao){
+  aplicarEfeitos(opcao.efeitos || {});
+  adicionarLog(opcao.feedback);
+  renderStatus();
+  renderLog();
+
+  if (evento.id === "controle_antidoping"){
+    resolverControleAntidoping();
+    renderStatus();
+    renderLog();
+  }
+
+  if (verificarFimDeCarreira()) return;
+  avancarCalendario();
+}
+
+function resolverControleAntidoping(){
+  const susp = gameState.atributos.suspeitaDoping;
+  if (susp >= 85 && Math.random() < 0.6){
+    gameState.atributos.suspeitaDoping = 100;
+    adicionarLog("O exame antidoping aponta irregularidades nos seus valores biológicos.");
+  } else {
+    const alivio = 15 + Math.floor(Math.random() * 16);
+    gameState.atributos.suspeitaDoping = clamp(gameState.atributos.suspeitaDoping - alivio);
+    gameState.atributos.reputacao = clamp(gameState.atributos.reputacao + 2);
+    adicionarLog(`O exame não aponta irregularidades. A pressão sobre você diminui. (-${alivio} Suspeita de Doping)`);
+  }
+}
+
+/* ============================================================
+   VARIAÇÃO NARRATIVA E DISPENSA DE PROVA
+   ============================================================ */
+const FRASES_REPETICAO = [
+  "Mais uma vez, {nome} chega a {corrida}. ",
+  "Já não é a primeira vez que o pelotão encontra {nome} em {corrida}. ",
+  "A experiência acumulada em edições anteriores de {corrida} pesa a favor de {nome}. ",
+  "De volta a {corrida}, agora com mais quilômetros nas pernas do que na última vez. "
+];
+
+function fraseRepeticao(nomeCorrida){
+  if (!gameState.corridasVisitadas) gameState.corridasVisitadas = {};
+  const vezes = gameState.corridasVisitadas[nomeCorrida] || 0;
+  gameState.corridasVisitadas[nomeCorrida] = vezes + 1;
+  if (vezes === 0) return "";
+  const frase = FRASES_REPETICAO[Math.floor(Math.random() * FRASES_REPETICAO.length)];
+  return frase.replace("{nome}", gameState.nome).replace("{corrida}", nomeCorrida);
+}
+
+function opcaoDispensa(){
+  return { texto: "🚩 Pedir dispensa desta prova para se recuperar", dispensa: true };
+}
+
+function dispensarCorrida(nomeExibicao, tipo){
+  const penalidade = (tipo === "monumento" || tipo === "grandvolta") ? -3 : -1;
+  gameState.atributos.reputacao = clamp(gameState.atributos.reputacao + penalidade);
+  gameState.atributos.resistencia = clamp(gameState.atributos.resistencia + 10);
+  gameState.atributos.explosao = clamp(gameState.atributos.explosao + 3);
+  gameState.atributos.potencia = clamp(gameState.atributos.potencia + 3);
+  adicionarLog(`Você pediu dispensa de ${nomeExibicao} para focar na recuperação e no restante da temporada. (${penalidade} Reputação, corpo mais fresco)`);
+  gameState.resultadosTemporada.push({ nome: nomeExibicao, tipo, tier: "ausente" });
+  gameState.estatisticasCarreira.ausencias += 1;
+}
+
+/* ============================================================
+   RENDER — CORRIDAS DE UM DIA
+   ============================================================ */
+function renderCorridaUmDia(corrida){
+  document.getElementById("evento-titulo").textContent = corrida.titulo;
+  document.getElementById("evento-descricao").textContent = fraseRepeticao(corrida.nome) + corrida.descricao;
+  setBadge(TIPO_LABEL_CURTO[corrida.tipo], gameState.ano);
+  montarBotoesOpcoes(corrida.opcoes.concat([opcaoDispensa()]), opcao => escolherOpcaoCorridaUmDia(corrida, opcao));
+  reanimarCard();
+}
+
+function escolherOpcaoCorridaUmDia(corrida, opcao){
+  if (opcao.dispensa){
+    dispensarCorrida(corrida.nome, corrida.tipo);
+    renderStatus();
+    renderLog();
+    if (verificarFimDeCarreira()) return;
+    avancarCalendario();
+    return;
+  }
+
+  aplicarEfeitos(opcao.efeitos || {});
+  adicionarLog(opcao.feedback);
+  renderStatus();
+  renderLog();
+
+  if (verificarFimDeCarreira()) return;
+
+  const resultado = resolverResultado(corrida.nome, corrida.tipo, corrida.pesos, opcao.tacticMod || 0);
+  renderResultado(corrida.nome, resultado);
+}
+
+/* ============================================================
+   RENDER — GRANDES VOLTAS (duas sub-etapas)
+   ============================================================ */
+function renderCorridaGrandVolta(corrida, subIndex){
+  const sub = corrida.subEtapas[subIndex];
+  document.getElementById("evento-titulo").textContent = sub.titulo;
+  const prefixo = subIndex === 0 ? fraseRepeticao(corrida.nome) : "";
+  document.getElementById("evento-descricao").textContent = prefixo + sub.descricao;
+  setBadge(TIPO_LABEL_CURTO[corrida.tipo], gameState.ano);
+  const opcoes = subIndex === 0 ? sub.opcoes.concat([opcaoDispensa()]) : sub.opcoes;
+  montarBotoesOpcoes(opcoes, opcao => escolherOpcaoGrandVolta(corrida, opcao, subIndex));
+  reanimarCard();
+}
+
+function escolherOpcaoGrandVolta(corrida, opcao, subIndex){
+  if (opcao.dispensa){
+    gameState.grandVoltaTemp = null;
+    dispensarCorrida(corrida.nome, corrida.tipo);
+    renderStatus();
+    renderLog();
+    if (verificarFimDeCarreira()) return;
+    avancarCalendario();
+    return;
+  }
+
+  aplicarEfeitos(opcao.efeitos || {});
+  adicionarLog(opcao.feedback);
+  gameState.grandVoltaTemp.tacticSum += (opcao.tacticMod || 0);
+  gameState.grandVoltaTemp.count += 1;
+  renderStatus();
+  renderLog();
+
+  if (verificarFimDeCarreira()) return;
+
+  if (subIndex === 0){
+    renderCorridaGrandVolta(corrida, 1);
+  } else {
+    const tacticMedio = gameState.grandVoltaTemp.tacticSum / gameState.grandVoltaTemp.count;
+    gameState.grandVoltaTemp = null;
+    const resultado = resolverResultado(corrida.nome, corrida.tipo, corrida.pesos, tacticMedio);
+    renderResultado(corrida.nome + " — Classificação Geral", resultado);
+  }
+}
+
+/* ============================================================
+   RENDER — RESULTADO DE CORRIDA
+   ============================================================ */
+function renderResultado(nomeCorrida, resultado){
+  document.getElementById("evento-titulo").textContent = "Resultado — " + nomeCorrida;
+  setBadge("RESULTADO", gameState.ano);
+
+  const desc = document.getElementById("evento-descricao");
+  const sinalRep = resultado.recompensa > 0 ? "+" : "";
+  const linhaAtributo = resultado.atributoGanho
+    ? `<br>Sua boa fase também rendeu ganho de forma: +${resultado.ganho} ${LABELS_ATRIBUTOS[resultado.atributoGanho]}.`
+    : "";
+  desc.innerHTML = `
+    <span class="font-display text-xl tier-${resultado.tier}">${TIER_LABEL[resultado.tier]}</span>
+    <br><br>
+    A reputação de ${gameState.nome} mudou em ${sinalRep}${resultado.recompensa} pontos após essa prova.
+    ${linhaAtributo}
+    <br><br>
+    A equipe ${gameState.equipe} acompanha de perto cada resultado do calendário.
+  `;
+
+  const container = document.getElementById("evento-opcoes");
+  container.innerHTML = "";
+  const btn = document.createElement("button");
+  btn.className = "btn-option btn-continuar rounded-lg px-4 py-3 w-full font-display font-semibold tracking-wide";
+  btn.textContent = "Continuar";
+  btn.addEventListener("click", () => {
+    renderStatus();
+    renderLog();
+    if (verificarFimDeCarreira()) return;
+    avancarCalendario();
+  });
+  container.appendChild(btn);
+
+  reanimarCard();
+}
+
+/* ============================================================
+   FIM DE TEMPORADA E MERCADO DE TRANSFERÊNCIAS
+   ============================================================ */
+function finalizarTemporada(){
+  const vitoriasTemporada = gameState.resultadosTemporada.filter(r => r.tier === "vitoria").length;
+  const podiosTemporada = gameState.resultadosTemporada.filter(r => r.tier === "podio").length;
+  gameState.historicoTemporadas.push({
+    temporada: gameState.temporada,
+    ano: gameState.ano,
+    equipe: gameState.equipe,
+    papel: gameState.papel,
+    vitorias: vitoriasTemporada,
+    podios: podiosTemporada,
+    resultados: [...gameState.resultadosTemporada]
+  });
+
+  const aposentando = gameState.temporada >= MAX_TEMPORADAS;
+
+  document.getElementById("evento-titulo").textContent = aposentando
+    ? `Última Temporada — ${gameState.temporada}`
+    : `Fim da Temporada ${gameState.temporada}`;
+  setBadge("RESUMO", gameState.ano);
+
+  const desc = document.getElementById("evento-descricao");
+  if (gameState.resultadosTemporada.length === 0){
+    desc.innerHTML = "Uma temporada sem grandes destaques nas provas principais do calendário.";
+  } else {
+    const linhas = gameState.resultadosTemporada.map(r => {
+      return `<div class="flex justify-between border-b py-1.5" style="border-color:var(--border)">
+        <span>${r.nome}</span>
+        <span class="tier-${r.tier} font-semibold">${TIER_LABEL[r.tier]}</span>
+      </div>`;
+    }).join("");
+    desc.innerHTML = `<div class="text-sm">${linhas}</div>`;
+  }
+
+  const container = document.getElementById("evento-opcoes");
+  container.innerHTML = "";
+  const btn = document.createElement("button");
+  btn.className = "btn-option btn-continuar rounded-lg px-4 py-3 w-full font-display font-semibold tracking-wide";
+  btn.textContent = aposentando ? "Encerrar carreira e ver o legado" : "Ver mercado de transferências";
+  btn.addEventListener("click", () => {
+    gameState.resultadosTemporada = [];
+    if (aposentando){
+      renderResumoCarreira();
+    } else {
+      renderEventoContrato();
+    }
+  });
+  container.appendChild(btn);
+
+  reanimarCard();
+}
+
+function sortearEquipeDiferente(pool){
+  const opcoes = pool.filter(t => t.nome !== gameState.equipe);
+  return opcoes[Math.floor(Math.random() * opcoes.length)];
+}
+
+function gerarOfertaContrato(){
+  const atr = gameState.atributos;
+  const statMedio = (atr.potencia + atr.explosao + atr.resistencia) / 3;
+  const nivelJogador = atr.reputacao * 0.5 + statMedio * 0.5;
+
+  let poolForte;
+  if (nivelJogador >= 75) poolForte = EQUIPES_ELITE;
+  else if (nivelJogador >= 55) poolForte = EQUIPES_FORTES;
+  else poolForte = EQUIPES_MEDIAS;
+
+  const timeA = sortearEquipeDiferente(poolForte);
+  let timeB = sortearEquipeDiferente(EQUIPES_MEDIAS.concat(EQUIPES_FRACAS));
+  if (timeB.nome === timeA.nome){
+    timeB = sortearEquipeDiferente(EQUIPES_FRACAS);
+  }
+  return { timeA, timeB };
+}
+
+function renderEventoContrato(){
+  const oferta = gerarOfertaContrato();
+  document.getElementById("evento-titulo").textContent = "Mercado de Transferências";
+  setBadge("CONTRATO", gameState.ano);
+  document.getElementById("evento-descricao").textContent =
+    `Fim de temporada. Seu empresário chega com duas propostas concretas na mesa, além da possibilidade de renovar com a ${gameState.equipe}.`;
+
+  const opcoes = [
+    {
+      texto: `Ir para a ${oferta.timeA.nome} como gregário`,
+      onSelecionar: () => {
+        adicionarLog(`${gameState.nome} assina com a ${oferta.timeA.nome} como gregário, trocando protagonismo por estrutura.`);
+        gameState.equipe = oferta.timeA.nome;
+        gameState.equipeRating = oferta.timeA.rating;
+        gameState.papel = "Gregário";
+      }
+    },
+    {
+      texto: `Assumir a ${oferta.timeB.nome} como líder máximo`,
+      onSelecionar: () => {
+        adicionarLog(`${gameState.nome} assina com a ${oferta.timeB.nome} como líder absoluto do projeto esportivo.`);
+        gameState.equipe = oferta.timeB.nome;
+        gameState.equipeRating = oferta.timeB.rating;
+        gameState.papel = "Líder";
+      }
+    },
+    {
+      texto: `Permanecer na ${gameState.equipe} (renovar contrato)`,
+      onSelecionar: () => {
+        adicionarLog(`${gameState.nome} renova contrato com a ${gameState.equipe}.`);
+        if (gameState.papel === "Gregário" && gameState.atributos.reputacao >= 80){
+          gameState.papel = "Co-líder";
+          adicionarLog(`Depois de tanta entrega, a equipe promete mais liberdade: ${gameState.nome} agora corre como co-líder.`);
+        }
+        gameState.equipeRating = clamp(gameState.equipeRating + 1);
+      }
+    }
+  ];
+
+  montarBotoesOpcoes(opcoes, opcao => {
+    opcao.onSelecionar();
+    renderStatus();
+    renderLog();
+    avancarParaProximaTemporada();
+  });
+
+  reanimarCard();
+}
+
+function avancarParaProximaTemporada(){
+  gameState.temporada += 1;
+  gameState.ano += 1;
+  gameState.blocoIndex = 0;
+  gameState.itemIndex = 0;
+  gameState.faseAtual = null;
+  gameState.calendario = construirCalendarioTemporada(gameState.ano);
+  renderStatus();
+  avancarCalendario();
+}
+
+/* ============================================================
+   FIM DE CARREIRA
+   ============================================================ */
+function verificarFimDeCarreira(){
+  if (gameState.atributos.suspeitaDoping >= 100){
+    mostrarFim(
+      "Flagrado no Controle Antidopagem",
+      `${gameState.nome} foi pego em um exame da agência antidopagem. A ${gameState.equipe} rescinde o contrato no mesmo dia. O nome sai do pelotão e não volta mais.`
+    );
+    return true;
+  }
+  if (gameState.atributos.reputacao <= 0){
+    mostrarFim(
+      "Dispensado pela Equipe",
+      `Depois de acumular decisões impopulares e atritos com companheiros e diretoria, a ${gameState.equipe} decide não renovar o contrato de ${gameState.nome}. Nenhuma outra equipe faz proposta.`
+    );
+    return true;
+  }
+  return false;
+}
+
+function mostrarFim(titulo, texto){
+  gameState.gameOver = true;
+  document.getElementById("tela-jogo").classList.add("hidden");
+  document.getElementById("tela-jogo").classList.remove("flex");
+  document.getElementById("fim-titulo").textContent = titulo;
+  document.getElementById("fim-texto").textContent = texto;
+  document.getElementById("tela-fim").classList.remove("hidden");
+  document.getElementById("tela-fim").classList.add("flex");
+}
+
+document.getElementById("btn-reiniciar").addEventListener("click", () => {
+  document.getElementById("tela-fim").classList.add("hidden");
+  document.getElementById("tela-fim").classList.remove("flex");
+  document.getElementById("tela-criacao").classList.remove("hidden");
+  document.getElementById("input-nome").value = "";
+  vertenteEscolhida = null;
+  montarOpcoesVertente();
+  atualizarBotaoIniciar();
+});
+
+/* ============================================================
+   TELA DE LEGADO — RESUMO FINAL DE CARREIRA (APOSENTADORIA)
+   ============================================================ */
+const GRUPOS_TITULOS = [
+  { label: "Grandes Voltas", nomes: ["Giro d'Italia", "Tour de France", "Vuelta a España"] },
+  { label: "Monumentos", nomes: ["Milão–Sanremo", "Ronde van Vlaanderen", "Paris–Roubaix", "Liège–Bastogne–Liège", "Il Lombardia"] },
+  { label: "Mundiais", nomes: ["Campeonato Mundial de Estrada"] },
+  { label: "Olimpíadas", nomes: ["Jogos Olímpicos — Ciclismo de Estrada"] },
+  { label: "Strade Bianche", nomes: ["Strade Bianche"] },
+  { label: "Provas Menores", nomes: ["Volta à Catalunha", "Critérium du Dauphiné"] }
+];
+
+const FRASES_LEGADO = {
+  lenda: ["Um dos maiores nomes que o ciclismo já viu.", "Geração inteira vai lembrar dessas pernas."],
+  grande: ["Um nome que o pelotão respeitava de verdade.", "Não venceu tudo, mas ninguém subestimava."],
+  solida: ["Uma carreira honesta, construída prova a prova.", "Sem grandes títulos, mas com respeito de sobra."],
+  discreta: ["Uma carreira discreta, longe dos holofotes.", "Rodou bastante estrada sem nunca virar manchete."],
+  dificil: ["Uma carreira marcada por dificuldades.", "O pelotão profissional nem sempre é gentil."]
+};
+
+function calcularGeralCarreira(){
+  const atr = gameState.atributos;
+  const media = (atr.potencia + atr.explosao + atr.resistencia) / 3;
+  let titulosGrandes = 0;
+  GRUPOS_TITULOS.forEach(g => {
+    if (g.label === "Provas Menores") return;
+    g.nomes.forEach(n => { titulosGrandes += (gameState.titulosPorProva[n] || 0); });
+  });
+  const bonusTitulos = Math.min(30, titulosGrandes * 2.2);
+  let geral = Math.round(media * 0.45 + atr.reputacao * 0.25 + bonusTitulos);
+  return Math.max(40, Math.min(99, geral));
+}
+
+function faixaLegado(geral){
+  if (geral >= 90) return "lenda";
+  if (geral >= 78) return "grande";
+  if (geral >= 63) return "solida";
+  if (geral >= 48) return "discreta";
+  return "dificil";
+}
+
+const TAGLINE_LEGADO = {
+  lenda: "Uma lenda do ciclismo mundial",
+  grande: "Um dos grandes nomes da sua geração",
+  solida: "Uma carreira sólida e respeitada no pelotão",
+  discreta: "Uma carreira discreta, mas honesta",
+  dificil: "Uma carreira de muitas dificuldades"
+};
+
+function renderResumoCarreira(){
+  document.getElementById("tela-jogo").classList.add("hidden");
+  document.getElementById("tela-jogo").classList.remove("flex");
+
+  const geral = calcularGeralCarreira();
+  const faixa = faixaLegado(geral);
+  const frases = FRASES_LEGADO[faixa];
+
+  document.getElementById("legado-geral").textContent = geral;
+  document.getElementById("legado-nome").textContent = gameState.nome;
+  document.getElementById("legado-tagline").textContent = TAGLINE_LEGADO[faixa].toUpperCase();
+
+  const equipesDefendidas = new Set(gameState.historicoTemporadas.map(t => t.equipe)).size;
+  document.getElementById("legado-subtitulo").textContent =
+    `${gameState.vertente} · ${equipesDefendidas} equipe(s) · ${gameState.historicoTemporadas.length} temporadas`;
+  document.getElementById("legado-frase").textContent = frases[Math.floor(Math.random() * frases.length)];
+
+  const est = gameState.estatisticasCarreira;
+  const numeros = [
+    { label: "Temporadas", valor: gameState.historicoTemporadas.length },
+    { label: "Provas Disputadas", valor: est.corridas },
+    { label: "Vitórias", valor: est.vitorias },
+    { label: "Pódios", valor: est.podios },
+    { label: "Top 10", valor: est.top10 },
+    { label: "Fora do Destaque", valor: est.pelotao },
+    { label: "Dispensas Pedidas", valor: est.ausencias },
+    { label: "Reputação Final", valor: gameState.atributos.reputacao }
+  ];
+  const numerosContainer = document.getElementById("legado-numeros");
+  numerosContainer.innerHTML = numeros.map(n => `
+    <div class="panel-2 rounded-lg px-3 py-3 text-center">
+      <div class="font-display text-2xl font-bold" style="color:var(--yellow)">${n.valor}</div>
+      <div class="text-[11px] mt-1" style="color:var(--muted)">${n.label}</div>
+    </div>
+  `).join("");
+
+  const titulosContainer = document.getElementById("legado-titulos");
+  titulosContainer.innerHTML = GRUPOS_TITULOS.map(g => {
+    const total = g.nomes.reduce((soma, n) => soma + (gameState.titulosPorProva[n] || 0), 0);
+    return `
+      <div class="panel-2 rounded-lg px-3 py-3 text-center">
+        <div class="font-display text-xl font-bold" style="color:${total > 0 ? 'var(--green)' : 'var(--muted)'}">${total}</div>
+        <div class="text-[11px] mt-1" style="color:var(--muted)">${g.label}</div>
+      </div>
+    `;
+  }).join("");
+
+  const temporadasContainer = document.getElementById("legado-temporadas");
+  temporadasContainer.innerHTML = gameState.historicoTemporadas.map(t => {
+    const melhor = t.resultados
+      .filter(r => r.tier === "vitoria" || r.tier === "podio")
+      .sort((a, b) => (a.tier === "vitoria" ? -1 : 1))[0];
+    const destaque = melhor ? `${melhor.nome} — ${TIER_LABEL[melhor.tier]}` : "Sem destaque na temporada";
+    return `
+      <div class="flex items-center justify-between py-2 border-b text-sm" style="border-color:var(--border)">
+        <span style="color:var(--muted)" class="w-20 shrink-0">${t.ano}</span>
+        <span class="flex-1">${t.equipe}</span>
+        <span class="w-16 text-center" style="color:var(--yellow)">🏆${t.vitorias}</span>
+        <span class="w-32 text-right text-xs" style="color:var(--muted)">${destaque}</span>
+      </div>
+    `;
+  }).join("");
+
+  document.getElementById("tela-legado").classList.remove("hidden");
+  document.getElementById("tela-legado").classList.add("flex");
+}
+
+document.getElementById("btn-nova-carreira-legado").addEventListener("click", () => {
+  document.getElementById("tela-legado").classList.add("hidden");
+  document.getElementById("tela-legado").classList.remove("flex");
+  document.getElementById("tela-criacao").classList.remove("hidden");
+  document.getElementById("input-nome").value = "";
+  vertenteEscolhida = null;
+  montarOpcoesVertente();
+  atualizarBotaoIniciar();
+});
+
+/* ============================================================
+   INICIALIZAÇÃO
+   ============================================================ */
+montarOpcoesVertente();
+atualizarBotaoIniciar();
+</script>
+</body>
+</html>
